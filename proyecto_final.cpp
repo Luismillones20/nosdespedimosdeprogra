@@ -9,9 +9,10 @@
 #include <thread>
 #include <mutex>
 #include "trie.h"
-
-// constexpr int N = 256;
+#include <algorithm>
+//constexpr int N = 256;
 using namespace std;
+
 // TAREAS:
 // 2. Que tenga una funcion thread que recorra una parte y otro otra
 // 3. Ponerle un sistema de puntuación en el cual se elija que pelicula debe ir primero
@@ -21,6 +22,7 @@ using namespace std;
 // 7. Imprimir 5 peliculas en orden, y luego un boton para las siguientes 5 peliculas
 // 8. Busqueda por tag
 // 9. Arreglar el tema de que no recorre ciertas palabras
+// 10. Ahorita nomas está buscando en titulo, también debe buscar en sinopsis
 
 
 
@@ -35,7 +37,7 @@ using namespace std;
 // 6. El más sencillo hasta ahora, poner q en lugar de un string reciba varios.
 // 10.
 // 8. En la busqueda por tag se tendria que comparar si es que está el tag se podria poner tuplas en lugar de pairs, en este caso if tupla pertenece a peliculas se pone la pelicula,
-// 9.
+// 9. CREO QUE EL PROBLEMA ES EL HECHO DE Q ALGUNOS CARACTERES LOS CONSIDERA COMO PALABRAS, POR EJEMPLO ARTHUR:
 
 
 // EXTRA:
@@ -66,14 +68,26 @@ void SafeGetWordByWord(string& text, TrieNode& trie) {
     InsertWordByWordToTheTrie(text, trie);
 }*/
 
+template <typename... Vectors>
+void peliculas_asignadas(const unordered_map<string, pair<string, string>> &mapa, const Vectors&... vector_ids) {
+    set<string> printed_titles; // Set para almacenar títulos impresos y evitar duplicados
 
-void peliculas_asignadas(vector<string> &vector_ids, unordered_map<string, pair<string, string>> & mapa){
-    for (auto id: vector_ids ){
-        cout << mapa[id].first << endl;
-        //cout << mapa[id].second << endl;
-        //cout << endl;
+    // Función lambda para procesar cada ID en los vectores
+    auto process_id = [&](const string& id) {
+        // Verificamos si el id existe en el mapa antes de continuar
+        if (mapa.find(id) != mapa.end()) {
+            const string &title = mapa.at(id).first; // Obtener el título de la película
 
-    }
+            // Si el título no ha sido impreso, lo imprimimos y lo agregamos al conjunto
+            if (printed_titles.find(title) == printed_titles.end()) {
+                cout << title << endl;
+                printed_titles.insert(title);
+            }
+        }
+    };
+
+    // Aplicar `process_id` a cada ID en cada vector
+    (void)initializer_list<int>{(for_each(vector_ids.begin(), vector_ids.end(), process_id), 0)...};
 }
 int main() {
     ifstream file("C:/progra3/mpst_full_data (1).csv");
@@ -138,8 +152,7 @@ int main() {
         cout <<"Ingrese el nombre de la pelicula: " << endl; cin >> busqueda;
         vector<string> results = trieTitle.searchByPrefix(busqueda);
         vector<string> results2 = trieSynopsis.searchByPrefix(busqueda);
-        peliculas_asignadas(results, mapa_ids);
-        peliculas_asignadas(results2, mapa_ids);
+        peliculas_asignadas(mapa_ids, results, results2);
     }
     else if (option == 2){
         string tag;
@@ -149,5 +162,6 @@ int main() {
     else{
         cout << "Vuelva a ingresar un numero. " << endl;
     }
+
     return 0;
 }
