@@ -8,9 +8,10 @@
 #include <set>
 #include <thread>
 #include <mutex>
-constexpr int N = 256;
-using namespace std;
+#include "trie.h"
 
+// constexpr int N = 256;
+using namespace std;
 // TAREAS:
 // 2. Que tenga una funcion thread que recorra una parte y otro otra
 // 3. Ponerle un sistema de puntuación en el cual se elija que pelicula debe ir primero
@@ -39,201 +40,6 @@ using namespace std;
 
 // EXTRA:
 // Que se imprima en pantalla
-
-class TrieNode {
-    unordered_set<int> movieIds; // IDs de películas donde aparece esta palabra
-    string ID;
-    char data; // Storing for printing purposes only
-    TrieNode* children[N];
-    bool is_leaf;
-public:
-    // constructor de TrieNode, la hoja es falsa por defecto y le crea
-    // un array de 256 caracteres todos con un puntero nullptr
-    TrieNode(){
-        for (int i = 0; i < N; i++) {
-            children[i] = nullptr;
-        }
-    }
-    TrieNode(char data) {
-        this->data = data;
-        this->is_leaf = false;
-        for (int i = 0; i < N; i++) {
-            children[i] = nullptr;
-        }
-    }
-
-    // funciones:
-
-    // insertar un nuevo nodo, si es que es un nullptr lo crea
-    // si no lo es, ahora el nuevo temp, es ahora el children[i]
-    // cuando llega al final is_leaf se vuelve true y retorna actualizado
-
-    TrieNode* insert(string word, string id) {
-        TrieNode* temp = this; // temp = trienode que se está usando
-        for (int i = 0; word[i] != '\0'; i++) {
-            int idx = static_cast<unsigned char>(word[i]);
-            if (temp->children[idx] == nullptr) {
-                temp->children[idx] = new TrieNode(word[i]);
-            }
-            temp = temp->children[idx];
-        }
-        temp->is_leaf = true;
-        temp->ID = id; // el id se agrega al final de la palabra
-        return this;
-    }
-
-    // Nuevamente tmp se vuelve un puntero temporal, si es que no lo encuentra devuelve false
-    // si es que lo encuentra se reemplaza, hasta cuando llegue al final, si es que
-    // no ha retornado false hasta ahora, entonces retornará un true
-
-    bool search(string word) {
-        TrieNode* temp = this;
-        for (int i = 0; word[i] != '\0'; i++) {
-            int idx = (unsigned char) word[i];
-            if (temp->children[idx] == nullptr) {
-                return false;
-            }
-            temp = temp->children[idx];
-        }
-        return temp->is_leaf;
-    }
-
-    //Nuevamente se usa un temp
-    // Recorre la longitud de la palabra, Si el caracter no es null
-    int check_divergence(string word) {
-        TrieNode* temp = this;
-        int len = word.length();
-        if (len == 0) return 0;
-        int last_index = 0;
-
-        for (int i = 0; i < len; i++) {
-            int position = static_cast<unsigned char>(word[i]);
-            if (temp->children[position]) {
-                for (int j = 0; j < N; j++) {
-                    if (j != position && temp->children[j]) {
-                        last_index = i + 1;
-                        break;
-                    }
-                }
-                temp = temp->children[position];
-            }
-        }
-        return last_index;
-    }
-    string find_longest_prefix(string word) {
-        if (word.empty()) return "";
-
-        string longest_prefix = word;
-        int branch_idx = check_divergence(longest_prefix) - 1;
-        if (branch_idx >= 0) {
-            longest_prefix = longest_prefix.substr(0, branch_idx);
-        }
-        return longest_prefix;
-    }
-    TrieNode* delete_word(const std::string& word) {
-        if (!this) return nullptr;
-        if (word.empty()) return this;
-        if (!is_leaf_node(word)) return this;
-
-        TrieNode* temp = this;
-        string longest_prefix = find_longest_prefix(word);
-
-        if (longest_prefix.empty()) { // Si el prefijo más largo está vacío
-            return this;
-        }
-
-        // Recorrer el prefijo más largo y navegar por el árbol Trie
-        for (size_t i = 0; i < longest_prefix.size(); ++i) {
-            int position = static_cast<unsigned char>(longest_prefix[i]);
-            if (temp->children[position] != nullptr) {
-                temp = temp->children[position];
-            } else {
-                return this; // Si no se encuentra el nodo en el prefijo más largo, no borrar nada
-            }
-        }
-
-        // Ahora borrar las palabras restantes que no formen parte del prefijo
-        size_t len = word.size();
-        for (size_t i = longest_prefix.size(); i < len; ++i) {
-            int position = static_cast<unsigned char>(word[i]);
-            if (temp->children[position]) {
-                TrieNode* rm_node = temp->children[position];
-                temp->children[position] = nullptr;
-                delete rm_node; // Eliminar el nodo
-            }
-        }
-        return this;
-    }
-
-    bool is_leaf_node(const std::string& word) {
-        TrieNode* temp = this;
-        for (char c : word) {
-            int position = static_cast<unsigned char>(c); // Obtener el valor de la posición
-            if (temp->children[position]) {
-                temp = temp->children[position]; // Avanzar en el árbol Trie
-            } else {
-                return false; // Si no se encuentra el nodo, no es una hoja
-            }
-        }
-        return temp->is_leaf; // Retornar si es una hoja al final del recorrido
-    }
-
-
-    // Print the Trie (for debugging purposes)
-    void print() {
-        if (this) {
-            cout << this->data << " -> ";
-            for (int i = 0; i < N; i++) {
-                if (children[i] != nullptr) {
-                    children[i]->print();
-                }
-            }
-        }
-    }
-
-    void findWordsWithPrefix(const string& prefix, vector<string>& result) {
-        TrieNode* temp = this;
-
-        // Buscar el nodo final del prefijo
-        for (char c : prefix) {
-            int idx = static_cast<unsigned char>(c);
-            if (temp->children[idx] == nullptr) return;  // No hay palabras con este prefijo
-            temp = temp->children[idx];
-        }
-
-        // Iniciar la búsqueda de todas las palabras desde el nodo del prefijo
-        findAllWords(temp, prefix, result);
-    }
-    // Función auxiliar para recorrer el Trie y obtener todas las palabras completas
-    void findAllWords(TrieNode* trieNode, string currentWord, vector<string>& result) {
-        if (trieNode == nullptr) return;
-
-        // Si es un nodo final de palabra, agregar la palabra actual a los resultados
-        if (trieNode->is_leaf) {
-            result.push_back(trieNode->ID);
-        }
-
-        // Recorrer todos los hijos para obtener más palabras
-        for (int i = 0; i < N; i++) {
-            if (trieNode->children[i] != nullptr) {
-                char nextChar = static_cast<char>(i);
-                findAllWords(trieNode->children[i], currentWord + nextChar, result);
-            }
-        }
-    }
-
-    vector<string> searchByPrefix(const string& prefix) {
-        vector<string> recommendations;
-        findWordsWithPrefix (prefix, recommendations);
-        return recommendations;
-    }
-    /*
-    ~TrieNode() {
-        for (auto& child : childrenTitle) {
-            delete child.second;  // Elimina cada nodo hijoggggg
-        }
-    }*/
-};
 
 void GetCorrectGetLines(ifstream  &file, string &temp) {
     bool insideQuotes = false;
@@ -264,8 +70,8 @@ void SafeGetWordByWord(string& text, TrieNode& trie) {
 void peliculas_asignadas(vector<string> &vector_ids, unordered_map<string, pair<string, string>> & mapa){
     for (auto id: vector_ids ){
         cout << mapa[id].first << endl;
-        cout << mapa[id].second << endl;
-        cout << endl;
+        //cout << mapa[id].second << endl;
+        //cout << endl;
 
     }
 }
@@ -290,6 +96,7 @@ int main() {
             getline(file, synopsis_source, '\n');
             mapa_ids[id] = {title, plot_synopsis};
             InsertWordByWordToTheTrie(title, trieTitle, id); // inserta palabra a palabra al trie, y se le asigna un id en este caso cuando sea el final de la palabra
+            InsertWordByWordToTheTrie(plot_synopsis,trieSynopsis, id);
             //GetWordByWord(plot_synopsis, trieSynopsis, 2);
             count++;
             continue;
@@ -314,16 +121,67 @@ int main() {
         //thread thread1(SafeGetWordByWord, ref(title), ref(trieTitle)); // el safeword solamente sirve para que entre el thread 1
 
         InsertWordByWordToTheTrie(title, trieTitle,id);
+        InsertWordByWordToTheTrie(plot_synopsis, trieSynopsis,id);
+
         //GetWordByWord(plot_synopsis, trieSynopsis, 2);
         //thread1.join();
         //trieTitle.imprimir("H");
 
         count++;
     }
-    string busqueda;
-    cout <<"Ingrese el nombre de la pelicula: " << endl; cin >> busqueda;
-    vector<string> results = trieTitle.searchByPrefix(busqueda);
-    //cout << trieTitle.search("Mr");
-    peliculas_asignadas(results, mapa_ids);
+    int option;
+    /*cout << "                       WELCOME TO THE THEATER                          \n";
+    cout << "_______________________________________________________________________\n";
+    cout << "|                                                                      |\n";
+    cout << "|   ################################################################   |\n";
+    cout << "|   #                                                              #   |\n";
+    cout << "|   #                       THE GRAND THEATER                      #   |\n";
+    cout << "|   #                                                              #   |\n";
+    cout << "|   #                        ~ ENJOY THE SHOW ~                    #   |\n";
+    cout << "|   ################################################################   |\n";
+    cout << "|______________________________________________________________________|\n";
+    cout << "           ||                                                ||        \n";
+    cout << "           ||      _______________       _______________     ||        \n";
+    cout << "           ||     |               |     |               |    ||        \n";
+    cout << "           ||     |               |     |               |    ||        \n";
+    cout << "           ||     |  [ ENTRADA ]  |     |  [ ENTRADA ]  |    ||        \n";
+    cout << "           ||     |               |     |               |    ||        \n";
+    cout << "           ||     |               |     |               |    ||        \n";
+    cout << "           ||     |_______________|     |_______________|    ||        \n";
+    cout << "           ||                                                ||        \n";
+    cout << "          /  \\                                             /  \\       \n";
+    cout << "         /____\\___________________________________________/____\\      \n";
+    cout << "        |                                                       |       \n";
+    cout << "        |                                                       |       \n";
+    cout << "        |___________________________||_________________________ |       \n";
+    cout << "        ||                         ||||                        ||      \n";
+    cout << "        ||                         ||||                        ||      \n";
+    cout << "        ||                         ||||                        ||      \n";
+    cout << "       /  \\                        ||||                       /  \\     \n";
+    cout << "      /____\\                       ||||                      /____\\    \n";
+    cout << "                                                                     \n";
+    cout << "                   Please proceed to the entrance                      \n";
+    cout << "_______________________________________________________________________\n";
+    cout << endl;
+*/
+    cout << "1. INGRESO DE PELICULA POR NOMBRE: " << endl;
+    cout << "2. INGRESO DE PELICULA POR TAG " << endl;
+    cin >> option;
+    if (option == 1){
+        string busqueda;
+        cout <<"Ingrese el nombre de la pelicula: " << endl; cin >> busqueda;
+        vector<string> results = trieTitle.searchByPrefix(busqueda);
+        vector<string> results2 = trieSynopsis.searchByPrefix(busqueda);
+        peliculas_asignadas(results, mapa_ids);
+        peliculas_asignadas(results2, mapa_ids);
+    }
+    else if (option == 2){
+        string tag;
+        cout <<"Ingrese el tag de la pelicula: " << endl; cin >> tag;
+
+    }
+    else{
+        cout << "Vuelva a ingresar un numero. " << endl;
+    }
     return 0;
 }
