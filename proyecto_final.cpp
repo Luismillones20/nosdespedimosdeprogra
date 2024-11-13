@@ -12,11 +12,30 @@ constexpr int N = 256;
 using namespace std;
 
 // TAREAS:
-// - Hacer lo mismo para sinopsis,
-// Que este en una funcion con thread, ambos
-// Asignarle un id
-// que no recorra solo una palabra sino varias
-// Que de recomendaciones
+// 2. Que tenga una funcion thread que recorra una parte y otro otra
+// 3. Ponerle un sistema de puntuación en el cual se elija que pelicula debe ir primero
+// 4. Sistema de likes (recomendar peliculas similiares), igual con ver mas tarde
+// 5. Usar el singleton, iterator, memento
+// 6. Busqueda por varias palabras
+// 7. Imprimir 5 peliculas en orden, y luego un boton para las siguientes 5 peliculas
+// 8. Busqueda por tag
+// 9. Arreglar el tema de que no recorre ciertas palabras
+
+
+
+
+// SOLUCIONES EN MENTE:
+
+
+// 2
+// 7. El like tendria un peso de 5, el ver mas tarde un peso de 3, se compararía cuales tienen mayor cantidad y se pondrían, basicamente un if si es que tiene un ver mas tarde o un like se pondría al inicio
+// 5. En el caso de singleton se pondría a la base de datos
+//      En el caso de memento se pondría para recordar las busquedas que ha realizado
+// 6. El más sencillo hasta ahora, poner q en lugar de un string reciba varios.
+// 10.
+// 8. En la busqueda por tag se tendria que comparar si es que está el tag se podria poner tuplas en lugar de pairs, en este caso if tupla pertenece a peliculas se pone la pelicula,
+// 9.
+
 
 // EXTRA:
 // Que se imprima en pantalla
