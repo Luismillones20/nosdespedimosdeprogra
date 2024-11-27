@@ -10,6 +10,7 @@
 #include <mutex>
 #include "trie.h"
 #include <algorithm>
+#include "menu.h"
 //constexpr int N = 256;
 using namespace std;
 
@@ -77,51 +78,6 @@ void InsertDataConcurrently(vector<string> &texts, TrieNode &trie, vector<string
     }
 }
 
-template <typename... Vectors>
-void peliculas_asignadas(const unordered_map<string, pair<string, string>>& mapa, const Vectors&... vector_ids) {
-    set<string> printed_titles; // Set para almacenar títulos impresos y evitar duplicados
-    int count = 0; // Contador para controlar las impresiones en lotes de 5
-
-    // Función lambda para procesar cada ID en los vectores
-    auto process_id = [&](const string& id) -> bool {
-        // Verificamos si el id existe en el mapa antes de continuar
-        auto it = mapa.find(id);
-        if (it != mapa.end()) {
-            const string& title = it->second.first; // Obtener el título de la película
-
-            // Si el título no ha sido impreso, lo imprimimos y lo agregamos al conjunto
-            if (printed_titles.insert(title).second) { // `.insert` retorna true si se inserta el elemento
-                cout << title << endl;
-                count++;
-
-                // Si hemos impreso 5 títulos, pedimos al usuario que presione una tecla para continuar
-                if (count == 5) {
-                    count = 0; // Reiniciar el contador para el próximo lote de 5
-                    char rpta;
-                    cout << "PRESIONE N para ver las siguientes 5 peliculas o cualquier otra tecla para salir: ";
-                    cin >> rpta;
-                    if (rpta != 'N' && rpta != 'n') {
-                        return false; // Interrumpimos el procesamiento
-                    }
-                    cout << endl << endl;
-                }
-
-            }
-        }
-        return true;
-    };
-
-    // Aplicar `process_id` a cada ID en cada vector y detenerse si el usuario elige salir
-    bool continue_processing = true;
-    // Expandimos y procesamos cada vector usando `process_id`
-    ([&]() {
-        for (const auto& id : vector_ids) {
-            if (!continue_processing) break;
-            continue_processing = process_id(id);
-        }
-    }(), ...); // Ejecutar la lambda para cada vector en `vector_ids`
-}
-
 int main() {
     ifstream file("C:/progra3/mpst_full_data (1).csv");
     if (!file) {
@@ -133,7 +89,7 @@ int main() {
     int count = 0;
     TrieNode trieTitle;
     TrieNode trieSynopsis;
-    unordered_map<string, pair<string,string>> mapa_ids; // ID / NOMBRE
+    unordered_map<string, pair<string,string>> mapa_ids; // ID-> (TITULO, SINOPSIS)
     TrieNode trieTags;
     auto start = chrono::high_resolution_clock::now();
     while (getline(file, id, ',')) {
@@ -183,74 +139,11 @@ int main() {
 
         //GetWordByWord(plot_synopsis, trieSynopsis, 2);
         //thread1.join();
-        //trieTitle.imprimir("H");
-
         count++;
     }
     auto end = std::chrono::high_resolution_clock::now();
-
-    int option;
-    cout << "######################################################################\n";
-    cout << "#                                                                    #\n";
-    cout << "#                      WELCOME TO MOVIE STREAMING                    #\n";
-    cout << "#                         ~ Your Movie World ~                       #\n";
-    cout << "#                                                                    #\n";
-    cout << "######################################################################\n";
-    cout << "#                                                                    #\n";
-    cout << "#      ________        ________          ________         ________    #\n";
-    cout << "#     |        |      |        |        |        |        |       |   #\n";
-    cout << "#     |  MOVIE |      | MOVIE  |        | MOVIE  |        | MOVIE |   #\n";
-    cout << "#     | POSTER |      | POSTER |        | POSTER |        | POSTER|   #\n";
-    cout << "#     |_______ |      |________|        |________|        |_______|   #\n";
-    cout << "#                                                                    #\n";
-    cout << "#   Trending Now:         Watch Again:         Recommended for You:  #\n";
-    cout << "#   ______________      ______________         ______________        #\n";
-    cout << "#  |              |    |              |        |              |       #\n";
-    cout << "#  |   MOVIE A    |    |   MOVIE B    |        |   MOVIE C    |       #\n";
-    cout << "#  |______________|    |______________|        |______________|       #\n";
-    cout << "#                                                                    #\n";
-    cout << "# ------------------------------------------------------------------ #\n";
-    cout << "#                                                                    #\n";
-    cout << "#       [1] Search Movies  |  [2] Browse by Tags  |  [3] Watch Later #\n";
-    cout << "#                                                                    #\n";
-    cout << "#       [4] View Liked Movies   |   [5] Exit                         #\n";
-    cout << "#                                                                    #\n";
-    cout << "######################################################################\n";
-    cout << "#                  Select an option to continue...                   #\n";
-    cout << "######################################################################\n\n";
     chrono::duration<double> duration = end - start;
-    //cout << "TIEMPO DE DURACION: " << duration.count() << endl;
-    //cout << "1. INGRESO DE PELICULA POR NOMBRE: " << endl;
-    //cout << "2. INGRESO DE PELICULA POR TAG " << endl;
-    cin >> option;
-
-    if (option == 1){
-        string busqueda;
-        cout <<"Ingrese el nombre de la pelicula: " << endl; cin >> busqueda;
-        string word;
-        istringstream iss(busqueda);
-        while (iss >> word) {
-            vector<string> results = trieTitle.searchByPrefix(word);
-            vector<string> results2 = trieSynopsis.searchByPrefix(word);
-            peliculas_asignadas(mapa_ids, results, results2);
-        }
-
-
-    }
-    else if (option == 2){
-        string busqueda2;
-        cout <<"Ingrese el tag de la pelicula: " << endl; cin >> busqueda2;
-        string word;
-        istringstream iss(busqueda2);
-        while (iss >> word) {
-            vector<string> results3 = trieTags.searchByPrefix(busqueda2);
-            peliculas_asignadas(mapa_ids, results3);
-        }
-    }
-    else{
-        cout << "Vuelva a ingresar un numero. " << endl;
-    }
-
+    showMenu(trieTitle, trieSynopsis, trieTags, mapa_ids, duration);
     return 0;
 }
-// FALTA ARREGLAR LA FUNCION DE QUE RECIBA VARIOS A LA VEZ
+// FALTA ARREGLAR LA FUNCION DE QUE RECIBA VARIOS A LA VEZ// FALTA ARREGLAR LA FUNCION DE QUE RECIBA VARIOS A LA VEZ
