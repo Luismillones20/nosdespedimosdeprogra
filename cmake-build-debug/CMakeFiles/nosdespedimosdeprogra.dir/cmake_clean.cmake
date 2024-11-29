@@ -1,11 +1,13 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/nosdespedimosdeprogra.dir/Trie.cpp.o"
-  "CMakeFiles/nosdespedimosdeprogra.dir/Trie.cpp.o.d"
-  "CMakeFiles/nosdespedimosdeprogra.dir/menu.cpp.o"
-  "CMakeFiles/nosdespedimosdeprogra.dir/menu.cpp.o.d"
-  "CMakeFiles/nosdespedimosdeprogra.dir/proyecto_final.cpp.o"
-  "CMakeFiles/nosdespedimosdeprogra.dir/proyecto_final.cpp.o.d"
-  "nosdespedimosdeprogra"
+  "CMakeFiles/nosdespedimosdeprogra.dir/Trie.cpp.obj"
+  "CMakeFiles/nosdespedimosdeprogra.dir/Trie.cpp.obj.d"
+  "CMakeFiles/nosdespedimosdeprogra.dir/menu.cpp.obj"
+  "CMakeFiles/nosdespedimosdeprogra.dir/menu.cpp.obj.d"
+  "CMakeFiles/nosdespedimosdeprogra.dir/proyecto_final.cpp.obj"
+  "CMakeFiles/nosdespedimosdeprogra.dir/proyecto_final.cpp.obj.d"
+  "libnosdespedimosdeprogra.dll.a"
+  "nosdespedimosdeprogra.exe"
+  "nosdespedimosdeprogra.exe.manifest"
   "nosdespedimosdeprogra.pdb"
 )
 

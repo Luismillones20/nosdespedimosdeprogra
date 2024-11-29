@@ -1,4 +1,4 @@
-ToolSet: 1.0 (local)Ninja: 1.12.1@/var/lib/snapd/snap/clion/305/bin/ninja/linux/x64/ninja
+ToolSet: 11.0 w64 (local)@C:\Program Files\JetBrains\CLion 2023.3.4\bin\mingw
 Options: 
 
 Options:
