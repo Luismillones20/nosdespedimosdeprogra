@@ -92,25 +92,10 @@ int main() {
     unordered_map<string, pair<string,string>> mapa_ids; // ID-> (TITULO, SINOPSIS)
     TrieNode trieTags;
     auto start = chrono::high_resolution_clock::now();
-    while (getline(file, id, ',')) {
-        if (count == 0) {
-            getline(file, title, ',');
-            getline(file, plot_synopsis, ',');
-            getline(file, tags, ',');
-            getline(file, split, ',');
-            getline(file, synopsis_source, '\n');
-            mapa_ids[id] = {title, plot_synopsis};
-            //InsertWordByWordToTheTrie(title, trieTitle, id); // inserta palabra a palabra al trie, y se le asigna un id en este caso cuando sea el final de la palabra
-            //InsertWordByWordToTheTrie(plot_synopsis,trieSynopsis, id);
-            //InsertWordByWordToTheTrie(tags,trieTags, id);
-            //GetWordByWord(plot_synopsis, trieSynopsis, 2);
-            SafeInsertWordByWordToTheTrie(title, trieTitle, id);
-            SafeInsertWordByWordToTheTrie(plot_synopsis, trieSynopsis, id);
-            SafeInsertWordByWordToTheTrie(tags, trieTags, id);
 
-            count++;
-            continue;
-        }
+    string primeraLinea;
+    getline(file, primeraLinea);
+    while (getline(file, id, ',')) {
         getline(file, title, ',');
         string tempSynopsis;
         GetCorrectGetLines(file, tempSynopsis); // esta función garantiza que tienen que cerrarse las comillas para que recien se pueda pasar al siguiente getline
