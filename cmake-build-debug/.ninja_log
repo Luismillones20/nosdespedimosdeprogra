@@ -1,8 +1,0 @@
-# ninja log v5
-16	692	7545428603338313	CMakeFiles/nosdespedimosdeprogra.dir/Trie.cpp.obj	1b89bdeb878937d7
-9	939	7545428605754468	CMakeFiles/nosdespedimosdeprogra.dir/menu.cpp.obj	c0f7855eb1387d3f
-6	1082	7545440682844905	CMakeFiles/nosdespedimosdeprogra.dir/proyecto_final.cpp.obj	23396b5f35e43038
-1083	1386	7545440685835267	nosdespedimosdeprogra.exe	d15784d92c53cd3a
-4	491	7545441519755502	build.ninja	178616abadae701c
-1	307	7545441519755502	build.ninja	178616abadae701c
-8	336	7545441524714993	nosdespedimosdeprogra.exe	d15784d92c53cd3a
