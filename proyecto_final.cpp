@@ -79,8 +79,8 @@ void InsertDataConcurrently(vector<string> &texts, TrieNode &trie, vector<string
 }
 
 int main() {
-    ifstream file("C:/progra3/mpst_full_data (1).csv");
-    if (!file) {
+    ifstream file("../mpst_full_data (1).csv", ios::in);
+    if (!file.is_open()) {
         cerr << "Error al abrir el archivo" << endl;
         return 1;
     }
