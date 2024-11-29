@@ -1,3 +1,0 @@
-C:/Users/User/Desktop/C++/Progra3/nosdespedimosdeprogra/cmake-build-debug/CMakeFiles/nosdespedimosdeprogra.dir
-C:/Users/User/Desktop/C++/Progra3/nosdespedimosdeprogra/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/User/Desktop/C++/Progra3/nosdespedimosdeprogra/cmake-build-debug/CMakeFiles/rebuild_cache.dir
