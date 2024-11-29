@@ -130,5 +130,5 @@ int main() {
     chrono::duration<double> duration = end - start;
     showMenu(trieTitle, trieSynopsis, trieTags, mapa_ids, duration);
     return 0;
-}
+} // comentarioxd
 // FALTA ARREGLAR LA FUNCION DE QUE RECIBA VARIOS A LA VEZ// FALTA ARREGLAR LA FUNCION DE QUE RECIBA VARIOS A LA VEZ
