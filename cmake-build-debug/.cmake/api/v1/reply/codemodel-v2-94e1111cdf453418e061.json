@@ -6,7 +6,7 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.27"
@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "nosdespedimosdeprogra::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-nosdespedimosdeprogra-Debug-5fedf89dac022632b692.json",
+					"jsonFile" : "target-nosdespedimosdeprogra-Debug-b045b70d7a28f23a9b65.json",
 					"name" : "nosdespedimosdeprogra",
 					"projectIndex" : 0
 				}
@@ -49,12 +49,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/User/Desktop/C++/Progra3/nosdespedimosdeprogra/cmake-build-debug",
-		"source" : "C:/Users/User/Desktop/C++/Progra3/nosdespedimosdeprogra"
+		"build" : "/home/seodos/Escritorio/programacion/programacion-3/nosdespedimosdeprogra/cmake-build-debug",
+		"source" : "/home/seodos/Escritorio/programacion/programacion-3/nosdespedimosdeprogra"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 6
+		"minor" : 7
 	}
 }

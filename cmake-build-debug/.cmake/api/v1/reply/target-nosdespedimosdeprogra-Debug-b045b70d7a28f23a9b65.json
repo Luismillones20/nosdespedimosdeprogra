@@ -2,10 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "nosdespedimosdeprogra.exe"
-		},
-		{
-			"path" : "nosdespedimosdeprogra.pdb"
+			"path" : "nosdespedimosdeprogra"
 		}
 	],
 	"backtrace" : 1,
@@ -52,7 +49,7 @@
 			[
 				{
 					"backtrace" : 2,
-					"path" : "C:/Users/User/Desktop/C++/Progra3/nosdespedimosdeprogra/."
+					"path" : "/home/seodos/Escritorio/programacion/programacion-3/nosdespedimosdeprogra/."
 				}
 			],
 			"language" : "CXX",
@@ -84,16 +81,12 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
-			},
-			{
-				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
-				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
 	"name" : "nosdespedimosdeprogra",
-	"nameOnDisk" : "nosdespedimosdeprogra.exe",
+	"nameOnDisk" : "nosdespedimosdeprogra",
 	"paths" : 
 	{
 		"build" : ".",

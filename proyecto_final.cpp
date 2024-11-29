@@ -25,7 +25,7 @@ using namespace std;
 // 9. Arreglar el tema de que no recorre ciertas palabras
 // 10. Ahorita nomas está buscando en titulo, también debe buscar en sinopsis // FUNCION REALIZADA
 
-
+// Primer commit de sebastian :D
 
 
 // SOLUCIONES EN MENTE:
