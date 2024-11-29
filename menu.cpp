@@ -167,7 +167,7 @@ void showMenu( TrieNode& trieTitle, TrieNode& trieSynopsis, TrieNode& trieTags,
         } else if (option == 5) {
             GenerateSpaces();
             cout << "--------------------------------------------------------------------------------" << endl;
-            cout << "                       Gracias por usar Movie Streaming. ¡Adiós!" << endl;
+            cout << "                Gracias por usar Movie Streaming. ¡Hasta luego!" << endl;
             cout << "--------------------------------------------------------------------------------" << endl;
             break;
         } else {
