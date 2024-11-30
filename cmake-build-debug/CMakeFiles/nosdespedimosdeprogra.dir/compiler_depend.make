@@ -157,6 +157,8 @@ CMakeFiles/nosdespedimosdeprogra.dir/Trie.cpp.obj: C:/Games\ Games/C++\ david/UT
   C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/Trie.h
 
 CMakeFiles/nosdespedimosdeprogra.dir/menu.cpp.obj: C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/menu.cpp \
+  C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/Historial.h \
+  C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/Memento.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/algorithm \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward/binders.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bit \
@@ -332,6 +334,7 @@ CMakeFiles/nosdespedimosdeprogra.dir/menu.cpp.obj: C:/Games\ Games/C++\ david/UT
   C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/Trie.h
 
 CMakeFiles/nosdespedimosdeprogra.dir/proyecto_final.cpp.obj: C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/proyecto_final.cpp \
+  C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/Archivo.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/algorithm \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward/binders.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bit \
@@ -844,6 +847,10 @@ C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosd
 
 C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/menu.cpp:
 
+C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/Historial.h:
+
+C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/Memento.h:
+
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/algorithm:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/algorithmfwd.h:
@@ -875,6 +882,8 @@ C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/set:
 
 C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/menu.h:
+
+C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/Archivo.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/codecvt.h:
 

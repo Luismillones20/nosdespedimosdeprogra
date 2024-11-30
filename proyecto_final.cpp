@@ -11,6 +11,7 @@
 #include "trie.h"
 #include <algorithm>
 #include "menu.h"
+#include <Archivo.h>
 //constexpr int N = 256;
 using namespace std;
 
@@ -79,11 +80,8 @@ void InsertDataConcurrently(vector<string> &texts, TrieNode &trie, vector<string
 }
 
 int main() {
-    ifstream file("../mpst_full_data (1).csv", ios::in);
-    if (!file.is_open()) {
-        cerr << "Error al abrir el archivo" << endl;
-        return 1;
-    }
+    Archivo& archivo = Archivo::getArchivo("../mpst_full_data (1).csv");
+    ifstream& file = archivo.getFile();
 
     string id, title, plot_synopsis, tags, split, synopsis_source;
     int count = 0;

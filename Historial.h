@@ -5,7 +5,7 @@
 #include <iostream>
 #include <Memento.h>
 using namespace std;
-#ifndef HISTORIAL_H
+#ifndef HISTORIAL_HHi
 #define HISTORIAL_H
 
 class Historial {

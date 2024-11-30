@@ -84,6 +84,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Games Games/C++ david/UTEC/Programacion III/Projecto Final/nosdespedimosdeprogra/Archivo.h">
+			<Option target="nosdespedimosdeprogra"/>
+		</Unit>
 		<Unit filename="C:/Games Games/C++ david/UTEC/Programacion III/Projecto Final/nosdespedimosdeprogra/Historial.h">
 			<Option target="nosdespedimosdeprogra"/>
 		</Unit>

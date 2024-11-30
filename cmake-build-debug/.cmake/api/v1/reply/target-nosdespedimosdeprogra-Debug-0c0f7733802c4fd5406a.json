@@ -115,7 +115,8 @@
 			"sourceIndexes" : 
 			[
 				3,
-				4
+				4,
+				5
 			]
 		}
 	],
@@ -147,6 +148,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "Historial.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Archivo.h",
 			"sourceGroupIndex" : 1
 		}
 	],

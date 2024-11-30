@@ -10,4 +10,5 @@ add_executable(nosdespedimosdeprogra
         proyecto_final.cpp
         Trie.cpp
         Memento.h
-        Historial.h)
+        Historial.h
+        Archivo.h)
