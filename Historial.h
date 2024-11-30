@@ -1,12 +1,13 @@
 //
 // Created by david on 30/11/2024.
 //
+
+#ifndef HISTORIAL_HHi
+#define HISTORIAL_H
 #include <vector>
 #include <iostream>
 #include <Memento.h>
 using namespace std;
-#ifndef HISTORIAL_HHi
-#define HISTORIAL_H
 
 class Historial {
 private:
@@ -22,15 +23,13 @@ public:
             estados.pop_back();
             return estados.back();
         }
-        //return Memento();
-
     }
     /*
     Memento getEstadoActual(string count){
         return estados[estados.size()-1];
     }*/
     void printEstadoActual(int &counter) {
-        if (counter >= 0 && counter < static_cast<int>(estados.size())) {
+        if (counter >= 0 && counter < estados.size()) {
             cout << estados[counter].getState();
         } else {
             cout << "No hay más películas para mostrar.\n";

@@ -16,13 +16,14 @@ void AsignedMovies(const unordered_map<string, pair<string, string>>& mapa,
                    TrieNode& trieSynopsis,
                    TrieNode& trieTags,
                    chrono::duration<double> duration,
-                   const vector<string>& vector_ids) {
+                   const Vectors&... vector_ids) {
     set<string> printed_titles;       // Evitar duplicados
     int count = 0;                   // Contador de películas mostradas
     bool exit_loop = false;          // Controlar la salida del bucle principal
     vector<pair<string, string>> movies_5; // Almacena las películas actuales
     Historial historial;             // Objeto para manejar los estados
     int counter = 0;                 // Contador para gestionar estados del historial
+    size_t num_vectors = sizeof...(vector_ids); // cantidad de vectores recibidos
 
     // Lambda para procesar y cargar las películas
     auto process_id = [&](const string& id) -> bool {
@@ -42,9 +43,16 @@ void AsignedMovies(const unordered_map<string, pair<string, string>>& mapa,
     };
 
     // Procesar todos los vectores
-    for (const auto& id : vector_ids) {
-        if (exit_loop) break;
-        process_id(id);
+    ([&]() {
+            for (const auto& id : vector_ids) {
+                if (exit_loop) break; // Romper el bucle si se activa `exit_loop`
+                process_id(id);      // Procesar cada ID individual
+            }
+    }(),...); // Expansión del pack para aplicar a cada vector
+
+    if (!movies_5.empty()) {
+        Memento memento(movies_5);
+        historial.agregarEstado(memento);
     }
 
     // Bucle principal para interactuar con el usuario

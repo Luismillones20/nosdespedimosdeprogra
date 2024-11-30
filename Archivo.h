@@ -1,14 +1,14 @@
 //
 // Created by david on 30/11/2024.
 //
+
+#ifndef ARCHIVO_H
+#define ARCHIVO_H
 #include <vector>
 #include <iostream>
 #include <fstream>
 #include <memory>
 using namespace std;
-#ifndef ARCHIVO_H
-#define ARCHIVO_H
-
 class Archivo {
 private:
     static unique_ptr<Archivo> instancia;
