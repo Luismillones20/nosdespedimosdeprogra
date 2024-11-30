@@ -1,0 +1,3 @@
+C:/Games Games/C++ david/UTEC/Programacion III/Projecto Final/nosdespedimosdeprogra/cmake-build-debug/CMakeFiles/nosdespedimosdeprogra.dir
+C:/Games Games/C++ david/UTEC/Programacion III/Projecto Final/nosdespedimosdeprogra/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Games Games/C++ david/UTEC/Programacion III/Projecto Final/nosdespedimosdeprogra/cmake-build-debug/CMakeFiles/rebuild_cache.dir

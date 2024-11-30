@@ -8,4 +8,6 @@ include_directories(.)
 add_executable(nosdespedimosdeprogra
         menu.cpp
         proyecto_final.cpp
-        Trie.cpp)
+        Trie.cpp
+        Memento.h
+        Historial.h)

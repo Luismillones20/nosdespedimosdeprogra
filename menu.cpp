@@ -4,6 +4,7 @@
 #include <set>
 #include <algorithm>
 #include <sstream>
+#include <Historial.h>
 using namespace std;
 
 void GenerateSpaces(){
@@ -15,47 +16,48 @@ void AsignedMovies(const unordered_map<string, pair<string, string>>& mapa,
                    TrieNode& trieSynopsis,
                    TrieNode& trieTags,
                    chrono::duration<double> duration,
-                   const Vectors&... vector_ids){
+                   const vector<string>& vector_ids) {
     set<string> printed_titles;       // Evitar duplicados
-    vector<pair<string, string>> current_movies; // Vector de películas actuales (título, sinopsis)
     int count = 0;                   // Contador de películas mostradas
     bool exit_loop = false;          // Controlar la salida del bucle principal
+    vector<pair<string, string>> movies_5; // Almacena las películas actuales
+    Historial historial;             // Objeto para manejar los estados
+    int counter = 0;                 // Contador para gestionar estados del historial
 
     // Lambda para procesar y cargar las películas
     auto process_id = [&](const string& id) -> bool {
         auto it = mapa.find(id);
         if (it != mapa.end() && printed_titles.insert(it->second.first).second) {
-            current_movies.emplace_back(it->second.first, it->second.second);
+            pair<string, string> movie = make_pair(it->second.first, it->second.second);
+            movies_5.emplace_back(movie);
             count++;
+            // Cada vez que se llenen 5 películas, crea un nuevo estado
+            if (count % 5 == 0) {
+                Memento memento(movies_5);
+                historial.agregarEstado(memento);
+                movies_5.clear(); // Limpia para preparar el siguiente grupo
+            }
         }
         return true;
     };
 
     // Procesar todos los vectores
-    ([&]() {
-        for (const auto& id : vector_ids) {
-            if (exit_loop) break;
-            process_id(id);
-        }
-    }(), ...);
+    for (const auto& id : vector_ids) {
+        if (exit_loop) break;
+        process_id(id);
+    }
 
     // Bucle principal para interactuar con el usuario
     int option = 0;
-    size_t start_index = 0; // Índice de inicio para mostrar películas
-
     while (!exit_loop) {
         GenerateSpaces();
         cout << "------------------------------------------------------------------------------------------------------\n";
         cout << "                                     Peliculas disponibles:\n";
         cout << "------------------------------------------------------------------------------------------------------\n";
 
-        for (size_t i = start_index; i < start_index + 5 && i < current_movies.size(); ++i) {  // Mostrar las siguientes 5 películas
-            cout << i + 1 << ". " << current_movies[i].first << endl;
-        }
-        if (count == 5){
-            count = 0;
-            current_movies.empty();
-        }
+        // Mostrar el estado actual del historial
+        historial.printEstadoActual(counter);
+
         // Mostrar opciones
         cout << "------------------------------------------------------------------------------------------------------\n";
         cout << "                                      Seleccione una opcion \n";
@@ -63,32 +65,40 @@ void AsignedMovies(const unordered_map<string, pair<string, string>>& mapa,
         cout << "1 - 5.             Ver sinopsis de la pelicula correspondiente.\n";
         cout << "6.                 Ver las siguientes 5 peliculas.\n";
         cout << "7.                 Regresar al menu principal.\n";
+        cout << "8.                 Volver al grupo anterior de peliculas.\n";
         cout << "------------------------------------------------------------------------------------------------------\n";
         cin >> option;
 
         if (option >= 1 && option <= 5) {
-            size_t index = start_index + option - 1;
-            if (index < current_movies.size()) {
+            // Mostrar sinopsis de la película seleccionada
+            const auto& estados = historial.getter_estados();
+            if (!estados.empty() && counter < static_cast<int>(estados.size())) {
+                const Memento& estado_actual = estados[counter];
                 GenerateSpaces();
-                cout << "Sinopsis de \"" << current_movies[index].first << "\":\n";
-                cout << current_movies[index].second << endl;
-                char espacio;
-                cout << "-----------------------------------------------------------------------------------------------\n";
-                cout << "                         Presione espacio para volver a las peliculas                              \n";
-                cout << "-----------------------------------------------------------------------------------------------\n";
-                cin >> espacio;
-                GenerateSpaces();
+                cout << "Sinopsis:\n" << estado_actual.getSynopsis(option - 1) << endl;
+                char e;
+                cout << "--------------------------------------------------------------------------------" << endl;
+                cout << "                Presione una tecla para poder volver a la pagina anterior " << endl;
+                cout << "--------------------------------------------------------------------------------" << endl;
+                cin >> e;
             } else {
-                cout << "Opcion inválida.\n";
+                cout << "No hay sinopsis disponible.\n";
             }
         } else if (option == 6) {
-            // Avanzar al siguiente lote de 5 películas
-            if (start_index + 5 < current_movies.size()) {
-                start_index += 5;
+            // Ver las siguientes 5 películas
+            if (counter < static_cast<int>(historial.getter_estados().size()) - 1) {
+                counter++;
             } else {
-                cout << "No hay mas peliculas para mostrar.\n";
+                cout << "No hay más películas para mostrar.\n";
             }
         } else if (option == 8) {
+            // Retroceder al grupo anterior
+            if (counter > 0) {
+                counter--;
+            } else {
+                cout << "No hay grupos anteriores.\n";
+            }
+        } else if (option == 7) {
             // Salir al menú principal
             exit_loop = true;
             showMenu(trieTitle, trieSynopsis, trieTags, mapa, duration);
@@ -97,6 +107,7 @@ void AsignedMovies(const unordered_map<string, pair<string, string>>& mapa,
         }
     }
 }
+
 
 
 void showMenu( TrieNode& trieTitle, TrieNode& trieSynopsis, TrieNode& trieTags,
