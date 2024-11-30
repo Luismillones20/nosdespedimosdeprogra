@@ -18,8 +18,17 @@ public:
 
     string getState() const {
         string str;
-        for (int i = 0; i < 5; i ++){
-            str += to_string(i+1) + ". " + current5movies[i].first + "\n";
+        if(current5movies.size() == 5){
+            for (int i = 0; i < 5; i ++){
+                str += to_string(i+1) + ". " + current5movies[i].first + "\n";
+            }
+        }
+        else{
+            int counter = 0;
+            while(counter < current5movies.size()){
+                str += to_string(counter+1) + ". " + current5movies[counter].first + "\n";
+                counter++;
+            }
         }
         return str;
     }

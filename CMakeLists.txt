@@ -11,4 +11,5 @@ add_executable(nosdespedimosdeprogra
         Trie.cpp
         Memento.h
         Historial.h
-        Archivo.h)
+        Archivo.h
+        Movie.h)
