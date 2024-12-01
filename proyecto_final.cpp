@@ -12,6 +12,8 @@
 #include <algorithm>
 #include "menu.h"
 #include <Archivo.h>
+
+#include "Movie.h"
 //constexpr int N = 256;
 using namespace std;
 
@@ -87,7 +89,7 @@ int main() {
     int count = 0;
     TrieNode trieTitle;
     TrieNode trieSynopsis;
-    unordered_map<string, pair<string,string>> mapa_ids; // ID-> (TITULO, SINOPSIS)
+    unordered_map<string, Movie*> mapa_ids; // ID-> (TITULO, SINOPSIS)
     TrieNode trieTags;
     auto start = chrono::high_resolution_clock::now();
 
@@ -107,7 +109,7 @@ int main() {
         GetCorrectGetLines(file, tempTags); // al ser una coma enumerativa, tiene que esperar a que termine la comilla
 
         tags = tempTags;
-        mapa_ids[id] = {title, plot_synopsis};
+        mapa_ids[id] = new Movie(id,title, plot_synopsis);
         getline(file, split, ',');
         getline(file, synopsis_source, '\n');
 
