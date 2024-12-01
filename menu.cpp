@@ -37,6 +37,133 @@ void showLikes(ifstream& file){
     cout<<endl;
 }
 
+void showWatchLater(ifstream& file){
+    string line, id, c, nombre;
+    getline(file, line);
+    cout<<"*** Lista para Ver Mas Tarde *** "<<endl;
+    while (true) {
+        file>>id>>ws>>c>>ws;
+        getline(file, nombre);
+        if(file.eof()) break;
+        cout<<id<<" "<<c<<" "<<nombre<<endl;
+    }
+    cout<<endl;
+}
+
+void saveLikes(string likedId, string likedTitle,vector<string>& vecLikedIds,vector<string>& vecLikedTitles){
+    //Primero, leer archivo con peliculas likeadas:
+
+    ifstream archLikesLeer("../listaLikes.txt", ios::in);
+    if (!archLikesLeer.is_open()) {
+        // Si el archivo de ganadores No existe:
+        cout << "No se pudo encontrar un registro de ganadores existente" << endl;
+        cout << "Creando nueva lista de ganadores..." << endl;
+
+        // Dar valor inicial al vector agregando la nueva pelicula likeada:
+        vecLikedIds.emplace_back(likedId);
+        vecLikedTitles.emplace_back(likedTitle);
+
+    } else { // Si el archivo de ganadores Sí existe:
+        //Detectar si existe la película likeada en el archivo. Si está, dejarla así. Si no, la añade.
+
+        //Primero, llenar los vectores con las peliculas likeadas existentes:
+        string linea, id, c, title;
+        bool foundMovieId = false;
+        getline(archLikesLeer, linea); // Leyendo la primera linea de "Lista de likes:"
+        while (true) {
+            archLikesLeer>>id>>ws>>c>>ws;
+            getline(archLikesLeer, title);
+            if(archLikesLeer.eof()) break;
+            vecLikedIds.emplace_back(id);
+            vecLikedTitles.emplace_back(title);
+        }
+
+        // Ahora, recorrer el vector de nombre buscando al id de la pelicula:
+        for (int i = 0; i < vecLikedIds.size(); i++) {
+            if (likedId == vecLikedIds[i]) {
+                foundMovieId = true; // Si lo encuentra,
+                break; // deja de buscar
+            }
+        }
+        // Si no lo encuentra, lo añade
+        if (!foundMovieId) {
+            vecLikedIds.emplace_back(likedId);
+            vecLikedTitles.emplace_back(likedTitle);
+        }
+
+        // Ya están los vectores actualizados con las películas likeadas (ids y títulos).
+        // Ahora, a escribirlos en el archivo listaLikes.txt
+
+    }
+    archLikesLeer.close(); // Cerramos el archivo (es buena práctica)
+
+    // Ahora, a escribir el archivo (siempre se sobreescribe)
+    ofstream archLikesEscribir("../listaVerMasTarde.txt", ios::out);
+
+    archLikesEscribir<<"Lista de likes: "<<endl;
+    for (int i = 0; i < vecLikedIds.size(); i++) {
+        archLikesEscribir << vecLikedIds[i]<<" - "<<vecLikedTitles[i]<<endl;
+    }
+    archLikesEscribir.close(); // Cerramos el archivo (es buena práctica)
+}
+
+void saveWatchLater(string watchL8rId, string watchL8rTitle,vector<string>& vecIds,vector<string>& vecTitles){
+    //Primero, leer archivo con peliculas likeadas:
+
+    ifstream archVerMasTardeLeer("../listaVerMasTarde.txt", ios::in);
+    if (!archVerMasTardeLeer.is_open()) {
+        // Si el archivo de ganadores No existe:
+        cout << "No se pudo encontrar un registro de peliculas para ver mas tarde existente" << endl;
+        cout << "Creando nueva lista..." << endl;
+
+        // Dar valor inicial al vector agregando la nueva pelicula likeada:
+        vecIds.emplace_back(watchL8rId);
+        vecTitles.emplace_back(watchL8rTitle);
+
+    } else { // Si el archivo Sí existe:
+        //Detectar si existe la película marcada en el archivo. Si está, dejarla así. Si no, la añade.
+
+        //Primero, llenar los vectores con las peliculas con Ver mas tarde existentes:
+        string linea, id, c, title;
+        bool foundMovieId = false;
+        getline(archVerMasTardeLeer, linea); // Leyendo la primera linea de "Lista para Ver mas tarde:"
+        while (true) {
+            archVerMasTardeLeer>>id>>ws>>c>>ws;
+            getline(archVerMasTardeLeer, title);
+            if(archVerMasTardeLeer.eof()) break;
+            vecIds.emplace_back(id);
+            vecTitles.emplace_back(title);
+        }
+
+        // Ahora, recorrer el vector de nombre buscando al id de la pelicula:
+        for (int i = 0; i < vecIds.size(); i++) {
+            if (watchL8rId == vecIds[i]) {
+                foundMovieId = true; // Si lo encuentra,
+                break; // deja de buscar
+            }
+        }
+        // Si no lo encuentra, lo añade
+        if (!foundMovieId) {
+            vecIds.emplace_back(watchL8rId);
+            vecTitles.emplace_back(watchL8rTitle);
+        }
+
+        // Ya están los vectores actualizados con las películas para Ver mas tarde (ids y títulos).
+        // Ahora, a escribirlos en el archivo listaVerMasTarde.txt
+
+    }
+    archVerMasTardeLeer.close(); // Cerramos el archivo (es buena práctica)
+
+    // Ahora, a escribir el archivo (siempre se sobreescribe)
+    ofstream archVerMasTardeEscribir("../listaVerMasTarde.txt", ios::out);
+
+    archVerMasTardeEscribir<<"Lista para Ver mas tarde: "<<endl;
+    for (int i = 0; i < vecIds.size(); i++) {
+        archVerMasTardeEscribir << vecIds[i]<<" - "<<vecTitles[i]<<endl;
+    }
+    archVerMasTardeEscribir.close(); // Cerramos el archivo (es buena práctica)
+}
+
 template <typename... Vectors>
 void AsignedMovies(const unordered_map<string, Movie*>& mapa,
                    TrieNode& trieTitle,
@@ -114,72 +241,24 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa,
                 int e;
                 cin >> e;
                 while(e == 1 || e==2){
-                    vector<string> vecLikedIds; // Vector con ids de películas con like
-                    vector<string> vecLikedTitles; // Vector con ids de películas con like
+                    vector<string> vecIds; // Vector con ids de películas con like
+                    vector<string> vecTitles; // Vector con ids de películas con like
                     if(e==1){
                         estado_actual.like(option-1);
-
                         // Guardando el id de la película likeada
                         string likedId, likedTitle;
                         likedId = estado_actual.getMovieId(option-1);
                         likedTitle = estado_actual.getMovieTitle(option-1);
-
-                        //Primero, leer archivo con peliculas likeadas:
-
-                        ifstream archLikesLeer("../listaLikes.txt", ios::in);
-                        if (!archLikesLeer.is_open()) {
-                            // Si el archivo de ganadores No existe:
-                            cout << "No se pudo encontrar un registro de ganadores existente" << endl;
-                            cout << "Creando nueva lista de ganadores..." << endl;
-
-                            // Dar valor inicial al vector agregando la nueva pelicula likeada:
-                            vecLikedIds.emplace_back(likedId);
-                            vecLikedTitles.emplace_back(likedTitle);
-
-                        } else { // Si el archivo de ganadores Sí existe:
-                            //Detectar si existe la película likeada en el archivo. Si está, dejarla así. Si no, la añade.
-
-                            //Primero, llenar los vectores con las peliculas likeadas existentes:
-                            string linea, id, c, title;
-                            bool foundMovieId = false;
-                            getline(archLikesLeer, linea); // Leyendo la primera linea de "Lista de likes:"
-                            while (true) {
-                                archLikesLeer>>id>>ws>>c>>ws;
-                                getline(archLikesLeer, title);
-                                if(archLikesLeer.eof()) break;
-                                vecLikedIds.emplace_back(id);
-                                vecLikedTitles.emplace_back(title);
-                            }
-
-                            // Ahora, recorrer el vector de nombre buscando al id de la pelicula:
-                            for (int i = 0; i < vecLikedIds.size(); i++) {
-                                if (likedId == vecLikedIds[i]) {
-                                    foundMovieId = true; // Si lo encuentra,
-                                    break; // deja de buscar
-                                }
-                            }
-                            // Si no lo encuentra, lo añade
-                            if (!foundMovieId) {
-                                vecLikedIds.emplace_back(likedId);
-                                vecLikedTitles.emplace_back(likedTitle);
-                            }
-
-                            // Ya están los vectores actualizados con las películas likeadas (ids y títulos).
-                            // Ahora, a escribirlos en el archivo listaLikes.txt
-
-                        }
-//                        archLikesLeer.close(); // Cerramos el archivo (es buena práctica)
-
-                        // Ahora, a escribir el archivo (siempre se sobreescribe)
-                        ofstream archLikesEscribir("../listaLikes.txt", ios::out);
-
-                        archLikesEscribir<<"Lista de likes: "<<endl;
-                        for (int i = 0; i < vecLikedIds.size(); i++) {
-                            archLikesEscribir << vecLikedIds[i]<<" - "<<vecLikedTitles[i]<<endl;
-                        }
-//                        archLikesEscribir.close();
+                        saveLikes(likedId, likedTitle, vecIds, vecTitles);
                     }
-                    else if(e==2)estado_actual.later(option-1);
+                    else if(e==2){
+                        estado_actual.later(option-1);
+                        // Guardando el id de la película para Ver Despues
+                        string watchL8rId, watchL8rTitle;
+                        watchL8rId = estado_actual.getMovieId(option-1);
+                        watchL8rTitle = estado_actual.getMovieTitle(option-1);
+                        saveWatchLater(watchL8rId, watchL8rTitle, vecIds, vecTitles);
+                    }
                     showSynopsis(estado_actual.getSynopsis(option - 1));
                     cin >> e;
                 }
@@ -303,13 +382,20 @@ void showMenu( TrieNode& trieTitle, TrieNode& trieSynopsis, TrieNode& trieTags,
             getline(cin, tag);
             vector<string> results = trieTags.searchByPrefix(tag);
             AsignedMovies(mapa_ids, trieTitle, trieSynopsis, trieTags, duration, results);
-        } else if (option == 4){
-                ifstream archLikesLeer("../listaLikes.txt",ios::in);
-                if (!archLikesLeer.is_open()) {
-                    cout << "No se han registrado likes." << endl;
-                }else{
-                    showLikes(archLikesLeer);
-                }
+        } else if(option == 3){
+            ifstream archVerMasTardeLeer("../listaVerMasTarde.txt",ios::in);
+            if (!archVerMasTardeLeer.is_open()) {
+                cout << "No se han registrado likes." << endl;
+            }else{
+                showWatchLater(archVerMasTardeLeer);
+            }
+        }else if (option == 4){
+            ifstream archLikesLeer("../listaLikes.txt",ios::in);
+            if (!archLikesLeer.is_open()) {
+                cout << "No se han registrado likes." << endl;
+            }else{
+                showLikes(archLikesLeer);
+            }
         } else if (option == 5) {
             GenerateSpaces();
             cout << "--------------------------------------------------------------------------------" << endl;
