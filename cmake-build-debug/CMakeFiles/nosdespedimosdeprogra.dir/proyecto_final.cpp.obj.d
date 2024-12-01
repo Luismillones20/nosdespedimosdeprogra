@@ -188,6 +188,9 @@ CMakeFiles/nosdespedimosdeprogra.dir/proyecto_final.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_tempbuf.h \
  C:\Games\ Games\C++\ david\UTEC\Programacion\ III\Projecto\ Final\nosdespedimosdeprogra\menu.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/chrono \
+ C:\Games\ Games\C++\ david\UTEC\Programacion\ III\Projecto\ Final\nosdespedimosdeprogra\Movie.h \
+ C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/utility \
+ C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_relops.h \
  C:/GAMESG~1/C__DAV~1/UTEC/PROGRA~3/PROJEC~1/NOSDES~1/./Archivo.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/memory \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_raw_storage_iter.h \

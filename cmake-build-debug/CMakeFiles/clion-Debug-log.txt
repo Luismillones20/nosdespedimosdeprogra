@@ -8,6 +8,6 @@ CMake Deprecation Warning:
   use the cmake-file-api(7) to view CMake-generated project build trees.
 
 
--- Configuring done (0.6s)
+-- Configuring done (0.8s)
 -- Generating done (0.0s)
 -- Build files have been written to: C:/Games Games/C++ david/UTEC/Programacion III/Projecto Final/nosdespedimosdeprogra/cmake-build-debug

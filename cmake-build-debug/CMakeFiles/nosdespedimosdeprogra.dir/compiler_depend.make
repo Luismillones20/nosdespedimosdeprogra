@@ -159,6 +159,7 @@ CMakeFiles/nosdespedimosdeprogra.dir/Trie.cpp.obj: C:/Games\ Games/C++\ david/UT
 CMakeFiles/nosdespedimosdeprogra.dir/menu.cpp.obj: C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/menu.cpp \
   C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/Historial.h \
   C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/Memento.h \
+  C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/Movie.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/algorithm \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward/binders.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bit \
@@ -220,6 +221,7 @@ CMakeFiles/nosdespedimosdeprogra.dir/menu.cpp.obj: C:/Games\ Games/C++\ david/UT
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_iterator_base_types.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_multiset.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_pair.h \
+  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_relops.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_set.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_tempbuf.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_tree.h \
@@ -274,6 +276,7 @@ CMakeFiles/nosdespedimosdeprogra.dir/menu.cpp.obj: C:/Games\ Games/C++\ david/UT
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/typeinfo \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/unordered_map \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/unordered_set \
+  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/utility \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/vector \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
@@ -330,17 +333,23 @@ CMakeFiles/nosdespedimosdeprogra.dir/menu.cpp.obj: C:/Games\ Games/C++\ david/UT
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/x86_64-w64-mingw32/include/vadefs.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/x86_64-w64-mingw32/include/wchar.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/x86_64-w64-mingw32/include/wctype.h \
+  C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/Movie.h \
   C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/menu.h \
   C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/Trie.h
 
 CMakeFiles/nosdespedimosdeprogra.dir/proyecto_final.cpp.obj: C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/proyecto_final.cpp \
   C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/Archivo.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/algorithm \
+  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward/auto_ptr.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward/binders.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bit \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/algorithmfwd.h \
+  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/align.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/alloc_traits.h \
+  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/allocated_ptr.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/allocator.h \
+  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/atomic_base.h \
+  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/atomic_lockfree_defines.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/basic_ios.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/basic_ios.tcc \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/basic_string.h \
@@ -385,6 +394,9 @@ CMakeFiles/nosdespedimosdeprogra.dir/proyecto_final.cpp.obj: C:/Games\ Games/C++
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/range_access.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/refwrap.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/requires_hosted.h \
+  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/shared_ptr.h \
+  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/shared_ptr_atomic.h \
+  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/shared_ptr_base.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/sstream.tcc \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/std_abs.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/std_mutex.h \
@@ -400,6 +412,8 @@ CMakeFiles/nosdespedimosdeprogra.dir/proyecto_final.cpp.obj: C:/Games\ Games/C++
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_iterator_base_types.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_multiset.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_pair.h \
+  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_raw_storage_iter.h \
+  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_relops.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_set.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_tempbuf.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_tree.h \
@@ -434,6 +448,7 @@ CMakeFiles/nosdespedimosdeprogra.dir/proyecto_final.cpp.obj: C:/Games\ Games/C++
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/aligned_buffer.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/alloc_traits.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/atomicity.h \
+  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/concurrence.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/numeric_traits.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/string_conversions.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/type_traits.h \
@@ -444,6 +459,7 @@ CMakeFiles/nosdespedimosdeprogra.dir/proyecto_final.cpp.obj: C:/Games\ Games/C++
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iostream \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/istream \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/limits \
+  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/memory \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/mutex \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/new \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ostream \
@@ -461,6 +477,7 @@ CMakeFiles/nosdespedimosdeprogra.dir/proyecto_final.cpp.obj: C:/Games\ Games/C++
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/typeinfo \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/unordered_map \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/unordered_set \
+  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/utility \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/vector \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/basic_file.h \
@@ -521,6 +538,7 @@ CMakeFiles/nosdespedimosdeprogra.dir/proyecto_final.cpp.obj: C:/Games\ Games/C++
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/x86_64-w64-mingw32/include/vadefs.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/x86_64-w64-mingw32/include/wchar.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/x86_64-w64-mingw32/include/wctype.h \
+  C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/Movie.h \
   C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/menu.h \
   C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/Trie.h
 
@@ -592,6 +610,8 @@ C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/hashtable_policy.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/invoke.h:
+
+C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/align.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/stdexcept:
 
@@ -753,6 +773,8 @@ C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32
 
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/unordered_map:
 
+C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/shared_ptr.h:
+
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/vector:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h:
@@ -803,6 +825,8 @@ C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/x86_64-w64-mingw32/include
 
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/x86_64-w64-mingw32/include/errno.h:
 
+C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward/auto_ptr.h:
+
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/x86_64-w64-mingw32/include/locale.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/x86_64-w64-mingw32/include/malloc.h:
@@ -851,6 +875,8 @@ C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosd
 
 C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/Memento.h:
 
+C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/Movie.h:
+
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/algorithm:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/algorithmfwd.h:
@@ -862,6 +888,8 @@ C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_algo.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_multiset.h:
+
+C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_relops.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_set.h:
 
@@ -881,19 +909,33 @@ C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32
 
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/set:
 
+C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/utility:
+
 C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/menu.h:
 
 C:/Games\ Games/C++\ david/UTEC/Programacion\ III/Projecto\ Final/nosdespedimosdeprogra/Archivo.h:
 
+C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/allocated_ptr.h:
+
+C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/atomic_base.h:
+
+C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/atomic_lockfree_defines.h:
+
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/codecvt.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/fstream.tcc:
+
+C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/shared_ptr_atomic.h:
+
+C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/shared_ptr_base.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/thread:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/std_mutex.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/std_thread.h:
+
+C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_raw_storage_iter.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/this_thread_sleep.h:
 
@@ -902,6 +944,10 @@ C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/unique_ptr.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstring:
+
+C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/concurrence.h:
+
+C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/memory:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/mutex:
 

@@ -93,6 +93,9 @@
 		<Unit filename="C:/Games Games/C++ david/UTEC/Programacion III/Projecto Final/nosdespedimosdeprogra/Memento.h">
 			<Option target="nosdespedimosdeprogra"/>
 		</Unit>
+		<Unit filename="C:/Games Games/C++ david/UTEC/Programacion III/Projecto Final/nosdespedimosdeprogra/Movie.h">
+			<Option target="nosdespedimosdeprogra"/>
+		</Unit>
 		<Unit filename="C:/Games Games/C++ david/UTEC/Programacion III/Projecto Final/nosdespedimosdeprogra/Trie.cpp">
 			<Option target="nosdespedimosdeprogra"/>
 		</Unit>

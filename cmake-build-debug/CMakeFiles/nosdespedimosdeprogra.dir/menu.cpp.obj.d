@@ -118,9 +118,7 @@ CMakeFiles/nosdespedimosdeprogra.dir/menu.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/x86_64-w64-mingw32/include/_timeval.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/x86_64-w64-mingw32/include/pthread_time.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/parse_numbers.h \
- C:\Games\ Games\C++\ david\UTEC\Programacion\ III\Projecto\ Final\nosdespedimosdeprogra\trie.h \
- C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/unordered_set \
- C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/unordered_set.h \
+ C:\Games\ Games\C++\ david\UTEC\Programacion\ III\Projecto\ Final\nosdespedimosdeprogra\Movie.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iostream \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ostream \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ios \
@@ -165,6 +163,11 @@ CMakeFiles/nosdespedimosdeprogra.dir/menu.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_tree.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_set.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_multiset.h \
+ C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/utility \
+ C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_relops.h \
+ C:\Games\ Games\C++\ david\UTEC\Programacion\ III\Projecto\ Final\nosdespedimosdeprogra\trie.h \
+ C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/unordered_set \
+ C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/unordered_set.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/algorithm \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_algo.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/algorithmfwd.h \
@@ -174,4 +177,5 @@ CMakeFiles/nosdespedimosdeprogra.dir/menu.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/sstream \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.5/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/sstream.tcc \
  C:/GAMESG~1/C__DAV~1/UTEC/PROGRA~3/PROJEC~1/NOSDES~1/./Historial.h \
- C:/GAMESG~1/C__DAV~1/UTEC/PROGRA~3/PROJEC~1/NOSDES~1/./Memento.h
+ C:/GAMESG~1/C__DAV~1/UTEC/PROGRA~3/PROJEC~1/NOSDES~1/./Memento.h \
+ C:/GAMESG~1/C__DAV~1/UTEC/PROGRA~3/PROJEC~1/NOSDES~1/./Movie.h
