@@ -43,7 +43,7 @@ public:
         return like;
     }
 
-    string getid() const {
+    string getId() const {
         return id;
     }
 

@@ -55,8 +55,12 @@ public:
         return str2;
     }
 
-    string printMovieTitle(int num) const{
-        return current5movies[num] -> getid();
+    string getMovieId(int num) const{
+        return current5movies[num] -> getId();
+    }
+
+    string getMovieTitle(int num) const{
+        return current5movies[num] -> getTitulo();
     }
 
     ~Memento();
