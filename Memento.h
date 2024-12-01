@@ -54,6 +54,11 @@ public:
         str2 = current5movies[num]->getsinopsis() + "\n" + "Tiene like: " + like + "\n" + "Ver mas tarde: " + later;
         return str2;
     }
+
+    string printMovieTitle(int num) const{
+        return current5movies[num] -> getid();
+    }
+
     ~Memento();
 };
 

@@ -115,6 +115,7 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa,
                 cin >> e;
                 while(e == 1 || e==2){
                     if(e==1){
+                        cout<<estado_actual.printMovieTitle(option-1);
                         estado_actual.like(option-1);
 
                         //Primero, leer archivo con peliculas likeadas:
