@@ -5,8 +5,6 @@
 #include <algorithm>
 #include <sstream>
 #include <Historial.h>
-#include <conio.h>
-
 #include "Movie.h"
 using namespace std;
 
@@ -31,7 +29,6 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa,
                    chrono::duration<double> duration,
                    const Vectors&... vector_ids) {
     set<string> printed_titles;       // Evitar duplicados
-    int count = 0;                   // Contador de películas mostradas
     bool exit_loop = false;          // Controlar la salida del bucle principal
     vector<Movie*> movies_5; // Almacena las películas actuales
     Historial historial;             // Objeto para manejar los estados
@@ -42,14 +39,7 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa,
         auto it = mapa.find(id);
         if (it != mapa.end() && printed_titles.insert(it->second->getTitulo()).second) {
             Movie* movie = it->second;
-            movies_5.emplace_back(movie);
-            count++;
-            // Cada vez que se llenen 5 películas, crea un nuevo estado
-            if (count % 5 == 0) {
-                Memento memento(movies_5);
-                historial.agregarEstado(memento);
-                movies_5.clear(); // Limpia para preparar el siguiente grupo
-            }
+            movies_5.push_back(movie);
         }
         return true;
     };
@@ -62,11 +52,29 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa,
             }
     }(),...); // Expansión del pack para aplicar a cada vector
 
-    //Añadirlas si es que no llegan a 5
-    if (!movies_5.empty()) {
-        Memento memento(movies_5);
-        historial.agregarEstado(memento);
-    }
+    //Un solo algoritmo para meter peliculas y ordenarlas en tiempo real
+    auto actualizarHistorial = [&]() {
+        // Ordenar todas las películas globalmente por peso
+        sort(movies_5.begin(), movies_5.end(), [](Movie* a, Movie* b) {
+            return a->verifyPeso() > b->verifyPeso();
+        });
+
+        // Limpiar el historial y regenerar mementos
+        historial.clearEstados();
+        vector<Movie*> group;
+        for (size_t i = 0; i < movies_5.size(); ++i) {
+            group.push_back(movies_5[i]);
+            if (group.size() == 5 || i == movies_5.size() - 1) {
+                Memento memento(group);
+                historial.agregarEstado(memento);
+                group.clear();  // Limpiar el grupo para la próxima iteración
+            }
+        }
+    };
+
+    // Ordenar por primera vez y generar historial
+    actualizarHistorial();
+
 
     // Bucle principal para interactuar con el usuario
     int option = 0;
@@ -77,7 +85,6 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa,
         cout << "------------------------------------------------------------------------------------------------------\n";
 
         // Mostrar el estado actual del historial
-        historial.orderEstados();
         historial.printEstadoActual(counter);
 
         // Mostrar opciones
@@ -95,7 +102,6 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa,
             auto& estados = historial.getter_estados();
             if (!estados.empty() && counter < static_cast<int>(estados.size())) {
                 Memento& estado_actual = estados[counter];
-                estado_actual.order(); //ordenamos la lista de movies de acuerdo al peso
                 showSynopsis( estado_actual.getSynopsis(option - 1));
                 int e;
                 cin >> e;
@@ -105,6 +111,11 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa,
                     showSynopsis(estado_actual.getSynopsis(option - 1));
                     cin >> e;
                 }
+                // **Actualizar pesos y reordenar dinámicamente**
+                actualizarHistorial();
+
+                // Ajustar el índice del historial después de reordenar
+                counter = min(counter, static_cast<int>(historial.getter_estados().size()) - 1);
             } else {
                 cout << "No hay sinopsis disponible.\n";
             }

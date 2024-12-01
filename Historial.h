@@ -24,6 +24,10 @@ public:
         }
     }
 
+    void clearEstados() {
+        estados.clear();
+    }
+
     Memento getEstadoAnterior() {
         if (estados.size() > 1) {
             estados.pop_back();

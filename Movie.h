@@ -15,8 +15,8 @@ private:
     string name;
     string sinopsis;
     int peso = 0;
-    bool like;
-    bool forLater;
+    bool like = false;
+    bool forLater = false;
 public:
     Movie(){}
     Movie(string id_, string name_, string sino_): id(std::move(id_)), name(std::move(name_)),sinopsis(std::move(sino_)){
