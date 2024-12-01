@@ -4,16 +4,18 @@
 #include <vector>
 #include <unordered_map>
 #include <chrono>
+
+#include "Movie.h"
 #include "trie.h"
 using namespace std;
 void showMenu(
         TrieNode& trieTitle,
         TrieNode& trieSynopsis,
         TrieNode& trieTags,
-        const unordered_map<string, pair<string, string>>& mapa_ids,
+        const unordered_map<string, Movie*>& mapa_ids,
         chrono::duration<double> duration);
 template <typename... Vectors>
-void AsignedMovies(const unordered_map<string, pair<string, string>>& mapa,
+void AsignedMovies(const unordered_map<string, Movie*>& mapa,
                    TrieNode& trieTitle,
                    TrieNode& trieSynopsis,
                    TrieNode& trieTags,

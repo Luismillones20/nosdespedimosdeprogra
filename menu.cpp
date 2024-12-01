@@ -5,13 +5,26 @@
 #include <algorithm>
 #include <sstream>
 #include <Historial.h>
+#include <conio.h>
+
+#include "Movie.h"
 using namespace std;
 
 void GenerateSpaces(){
     for (int i = 0; i < 40; i++) cout << "\n";
 }
+
+void showSynopsis(string sinopsis) {
+    GenerateSpaces();
+    cout << "Sinopsis:\n" << sinopsis << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "                 1.Dar Like            2.Agregar a Ver Mas Tarde                " << endl;
+    cout << "         Presione una tecla diferente para poder volver a la pagina anterior    " << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+}
+
 template <typename... Vectors>
-void AsignedMovies(const unordered_map<string, pair<string, string>>& mapa,
+void AsignedMovies(const unordered_map<string, Movie*>& mapa,
                    TrieNode& trieTitle,
                    TrieNode& trieSynopsis,
                    TrieNode& trieTags,
@@ -20,16 +33,15 @@ void AsignedMovies(const unordered_map<string, pair<string, string>>& mapa,
     set<string> printed_titles;       // Evitar duplicados
     int count = 0;                   // Contador de películas mostradas
     bool exit_loop = false;          // Controlar la salida del bucle principal
-    vector<pair<string, string>> movies_5; // Almacena las películas actuales
+    vector<Movie*> movies_5; // Almacena las películas actuales
     Historial historial;             // Objeto para manejar los estados
     int counter = 0;                 // Contador para gestionar estados del historial
-    size_t num_vectors = sizeof...(vector_ids); // cantidad de vectores recibidos
 
     // Lambda para procesar y cargar las películas
     auto process_id = [&](const string& id) -> bool {
         auto it = mapa.find(id);
-        if (it != mapa.end() && printed_titles.insert(it->second.first).second) {
-            pair<string, string> movie = make_pair(it->second.first, it->second.second);
+        if (it != mapa.end() && printed_titles.insert(it->second->getTitulo()).second) {
+            Movie* movie = it->second;
             movies_5.emplace_back(movie);
             count++;
             // Cada vez que se llenen 5 películas, crea un nuevo estado
@@ -50,6 +62,7 @@ void AsignedMovies(const unordered_map<string, pair<string, string>>& mapa,
             }
     }(),...); // Expansión del pack para aplicar a cada vector
 
+    //Añadirlas si es que no llegan a 5
     if (!movies_5.empty()) {
         Memento memento(movies_5);
         historial.agregarEstado(memento);
@@ -76,19 +89,21 @@ void AsignedMovies(const unordered_map<string, pair<string, string>>& mapa,
         cout << "8.                 Volver al grupo anterior de peliculas.\n";
         cout << "------------------------------------------------------------------------------------------------------\n";
         cin >> option;
-
         if (option >= 1 && option <= 5) {
             // Mostrar sinopsis de la película seleccionada
             const auto& estados = historial.getter_estados();
             if (!estados.empty() && counter < static_cast<int>(estados.size())) {
                 const Memento& estado_actual = estados[counter];
-                GenerateSpaces();
-                cout << "Sinopsis:\n" << estado_actual.getSynopsis(option - 1) << endl;
-                char e;
-                cout << "--------------------------------------------------------------------------------" << endl;
-                cout << "                Presione una tecla para poder volver a la pagina anterior " << endl;
-                cout << "--------------------------------------------------------------------------------" << endl;
+                showSynopsis( estado_actual.getSynopsis(option - 1));
+                int e;
                 cin >> e;
+                while(e == 1 || e==2){
+                    auto actual = historial.getter_estados();
+                    if(e==1)actual[counter].like(option-1);
+                    else if(e==2)actual[counter].later(option-1);
+                    showSynopsis(estado_actual.getSynopsis(option - 1));
+                    cin >> e;
+                }
             } else {
                 cout << "No hay sinopsis disponible.\n";
             }
@@ -116,10 +131,8 @@ void AsignedMovies(const unordered_map<string, pair<string, string>>& mapa,
     }
 }
 
-
-
 void showMenu( TrieNode& trieTitle, TrieNode& trieSynopsis, TrieNode& trieTags,
-               const unordered_map<string, pair<string, string>>& mapa_ids,
+               const unordered_map<string, Movie*>& mapa_ids,
                chrono::duration<double> duration) {
     int option = 0;
     vector<int> options = {1, 2, 3, 4, 5};

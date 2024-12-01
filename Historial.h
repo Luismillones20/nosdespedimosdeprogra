@@ -36,7 +36,7 @@ public:
         }
     }
 
-    const vector<Memento>& getter_estados() const {
+     vector<Memento>& getter_estados() {
         return estados;
     }
     //~Historial();
