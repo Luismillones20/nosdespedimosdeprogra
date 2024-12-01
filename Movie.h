@@ -55,6 +55,22 @@ public:
         return sinopsis;
     }
 
+    int getPeso() const {
+        return peso;
+    }
+
+    void setPeso(int peso) {
+        this->peso = peso;
+    }
+
+    void setLike(bool like) {
+        this->like = like;
+    }
+
+    void setForLater(bool forLater) {
+        this->forLater = forLater;
+    }
+
     ~Movie() = default;
 
 };

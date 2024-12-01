@@ -129,7 +129,7 @@ int main() {
     auto end = std::chrono::high_resolution_clock::now();
     chrono::duration<double> duration = end - start;
     showMenu(trieTitle, trieSynopsis, trieTags, mapa_ids, duration);
-//    file.close(); // Para cerrar el archivo (es buena práctica)
+    file.close(); // Para cerrar el archivo (es buena práctica)
     return 0;
 } // comentarioxd
 // FALTA ARREGLAR LA FUNCION DE QUE RECIBA VARIOS A LA VEZ// FALTA ARREGLAR LA FUNCION DE QUE RECIBA VARIOS A LA VEZ
