@@ -170,6 +170,64 @@ void saveWatchLater(string watchL8rId, string watchL8rTitle,vector<string>& vecI
     archVerMasTardeEscribir.close(); // Cerramos el archivo (es buena práctica)
 }
 
+void llenarVecLikesExistentes(vector<string>& vecLikesExistentes){
+    ifstream archLikesExistentesLeer("../listaLikes.txt", ios::in);
+    if (!archLikesExistentesLeer.is_open()) {
+        // Si el archivo de likes No existe:
+        cout << "No se pudo encontrar un registro de likes existente" << endl;
+    }else{
+        string line, id, c, nombre;
+        getline(archLikesExistentesLeer, line);
+        while (true) { // Si el archivo Sí existe
+            archLikesExistentesLeer>>id;
+            if(archLikesExistentesLeer.eof()) break;
+            archLikesExistentesLeer>>ws>>c>>ws;
+            getline(archLikesExistentesLeer, nombre);
+            vecLikesExistentes.emplace_back(id);
+        }
+        archLikesExistentesLeer.close();
+    }
+}
+
+void llenarVecForLaterExistentes(vector<string>& vecForLaterExistentes){
+    ifstream archforLaterExistentesLeer("../listaVerMasTarde.txt", ios::in);
+    if (!archforLaterExistentesLeer.is_open()) {
+        // Si el archivo de Ver mas tarde No existe:
+        cout << "No se pudo encontrar un registro de Para ver mas tarde existente" << endl;
+    }else{ // Si el archivo Sí existe
+        string line, id, c, nombre;
+        getline(archforLaterExistentesLeer, line);
+        while (true) {
+            archforLaterExistentesLeer>>id;
+            if(archforLaterExistentesLeer.eof()) break;
+            archforLaterExistentesLeer>>ws>>c>>ws;
+            getline(archforLaterExistentesLeer, nombre);
+            vecForLaterExistentes.emplace_back(id);
+        }
+        archforLaterExistentesLeer.close();
+    }
+}
+
+void modifyLikesAndForLater(Movie* &movie, const string& id,
+                            vector<string>& vecLikesExistentes, vector<string>& vecForLaterExistentes){
+    for(auto v : vecLikesExistentes){
+        if(v == id){
+            movie->setLike(true);
+            int p = movie->getPeso();
+            movie->setPeso(p+5);
+            break;
+        }
+    }
+    for(auto v : vecForLaterExistentes){
+        if(v == id){
+            movie->setForLater(true);
+            int p = movie->getPeso();
+            movie->setPeso(p+3);
+            break;
+        }
+    }
+}
+
 template <typename... Vectors>
 void AsignedMovies(const unordered_map<string, Movie*>& mapa,
                    TrieNode& trieTitle,
@@ -187,63 +245,16 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa,
     vector<string> vecLikesExistentes;
     vector<string> vecForLaterExistentes;
 
-    ifstream archLikesExistentesLeer("../listaLikes.txt", ios::in);
-    if (!archLikesExistentesLeer.is_open()) {
-        // Si el archivo de likes No existe:
-        cout << "No se pudo encontrar un registro de likes existente" << endl;
-    }else{
-        string line, id, c, nombre;
-        getline(archLikesExistentesLeer, line);
-        while (true) { // Si el archivo Sí existe
-            archLikesExistentesLeer>>id;
-            if(archLikesExistentesLeer.eof()) break;
-            archLikesExistentesLeer>>ws>>c>>ws;
-            getline(archLikesExistentesLeer, nombre);
-            vecLikesExistentes.emplace_back(id);
-        }
-        archLikesExistentesLeer.close();
-    }
-
-    ifstream archforLaterExistentesLeer("../listaVerMasTarde.txt", ios::in);
-    if (!archforLaterExistentesLeer.is_open()) {
-        // Si el archivo de Ver mas tarde No existe:
-        cout << "No se pudo encontrar un registro de Para ver mas tarde existente" << endl;
-    }else{ // Si el archivo Sí existe
-        string line, id, c, nombre;
-        getline(archforLaterExistentesLeer, line);
-        while (true) {
-            archforLaterExistentesLeer>>id;
-            if(archforLaterExistentesLeer.eof()) break;
-            archforLaterExistentesLeer>>ws>>c>>ws;
-            getline(archforLaterExistentesLeer, nombre);
-            vecForLaterExistentes.emplace_back(id);
-        }
-        archforLaterExistentesLeer.close();
-    }
-
+    llenarVecLikesExistentes(vecLikesExistentes);
+    llenarVecForLaterExistentes(vecForLaterExistentes);
 
     // Lambda para procesar y cargar las películas
     auto process_id = [&](const string& id) -> bool {
         auto it = mapa.find(id);
         if (it != mapa.end() && printed_titles.insert(it->second->getTitulo()).second) {
             Movie* movie = it->second;
-            //Agregar valores de Likeado y Ver mas tarde
-            for(auto v : vecLikesExistentes){
-                if(v == id){
-                    movie->setLike(true);
-                    int p = movie->getPeso();
-                    movie->setPeso(p+5);
-                    break;
-                }
-            }
-            for(auto v : vecForLaterExistentes){
-                if(v == id){
-                    movie->setForLater(true);
-                    int p = movie->getPeso();
-                    movie->setPeso(p+3);
-                    break;
-                }
-            }
+            //Agregar valores de Likeado y Ver mas tarde:
+            modifyLikesAndForLater(movie, id, vecLikesExistentes, vecForLaterExistentes);
 
             movies_5.emplace_back(movie);
             count++;
