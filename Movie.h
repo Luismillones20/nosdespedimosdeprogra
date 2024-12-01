@@ -43,7 +43,7 @@ public:
         return like;
     }
 
-    string getid() const {
+    string getId() const {
         return id;
     }
 
@@ -53,6 +53,22 @@ public:
 
     string getsinopsis() const {
         return sinopsis;
+    }
+
+    int getPeso() const {
+        return peso;
+    }
+
+    void setPeso(int peso) {
+        this->peso = peso;
+    }
+
+    void setLike(bool like) {
+        this->like = like;
+    }
+
+    void setForLater(bool forLater) {
+        this->forLater = forLater;
     }
 
     ~Movie() = default;
