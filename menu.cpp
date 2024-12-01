@@ -6,6 +6,7 @@
 #include <sstream>
 #include <Historial.h>
 #include <conio.h>
+#include <fstream>
 
 #include "Movie.h"
 using namespace std;
@@ -23,6 +24,18 @@ void showSynopsis(string sinopsis) {
     cout << "--------------------------------------------------------------------------------" << endl;
 }
 
+void showLikes(ifstream& file){
+    string line, id;
+    getline(file, line);
+    cout<<"*** Lista de likes *** ";
+    while (true) {
+        getline(file, id);
+        if(file.eof()) break;
+        cout<<id<<endl;
+    }
+    cout<<endl;
+}
+
 template <typename... Vectors>
 void AsignedMovies(const unordered_map<string, Movie*>& mapa,
                    TrieNode& trieTitle,
@@ -36,6 +49,7 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa,
     vector<Movie*> movies_5; // Almacena las películas actuales
     Historial historial;             // Objeto para manejar los estados
     int counter = 0;                 // Contador para gestionar estados del historial
+    vector<string> vecPeliculasLikeadas; // Vector con ids de películas con like
 
     // Lambda para procesar y cargar las películas
     auto process_id = [&](const string& id) -> bool {
@@ -100,7 +114,61 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa,
                 int e;
                 cin >> e;
                 while(e == 1 || e==2){
-                    if(e==1)estado_actual.like(option-1);
+                    if(e==1){
+                        estado_actual.like(option-1);
+
+                        //Primero, leer archivo con peliculas likeadas:
+
+                        ifstream archLikesLeer("../listaLikes.txt", ios::in);
+                        if (!archLikesLeer.is_open()) {
+                            // Si el archivo de ganadores No existe:
+                            cout << "No se pudo encontrar un registro de ganadores existente" << endl;
+                            cout << "Creando nueva lista de ganadores..." << endl;
+
+                            // Dar valor inicial al vector agregando la nueva pelicula likeada:
+                            vecPeliculasLikeadas.emplace_back(ID);
+
+                        } else { // Si el archivo de ganadores Sí existe:
+                            //Detectar si existe el ganador actual en el archivo ganadores. Si está, actualizar su contador. Si no, lo añade.
+
+                            //Primero, llenar los vectores con las peliculas likeadas existentes:
+                            string linea, id;
+                            bool peliEncontrada = false;
+                            getline(archLikesLeer, linea);
+                            while (true) {
+                                archLikesLeer>>id;
+                                if(archLikesLeer.eof()) break;
+                                vecPeliculasLikeadas.emplace_back(id);
+                            }
+
+                            // Ahora, recorrer el vector de nombre buscando al id de la pelicula:
+                            for (int i = 0; i < vecPeliculasLikeadas.size(); i++) {
+                                if (ID == vecPeliculasLikeadas[i]) {
+                                    peliEncontrada = true; // Si lo encuentra,
+                                    break; // deja de buscar
+                                }
+                            }
+                            // Si no lo encuentra, lo añade
+                            if (!peliEncontrada) {
+                                vecPeliculasLikeadas.emplace_back(ID);
+                            }
+
+                            // Ya está el vector actualizadas con las películas likeadas.
+                            // Ahora, a escribirlos en el archivo listaLikes.txt
+
+                        }
+                        archLikesLeer.close(); // Cerramos el archivo (es buena práctica)
+
+                        // Ahora, a escribir el archivo (siempre se sobreescribe)
+                        ofstream archLikesEscribir("../listaLikes.txt", ios::out);
+
+                        archLikesEscribir<<"Lista de likes: "<<endl;
+                        for (int i = 0; i < vecPeliculasLikeadas.size(); i++) {
+                            archLikesEscribir << vecPeliculasLikeadas[i]<<endl;
+                        }
+
+                        archLikesEscribir.close();
+                    }
                     else if(e==2)estado_actual.later(option-1);
                     showSynopsis(estado_actual.getSynopsis(option - 1));
                     cin >> e;
@@ -140,34 +208,62 @@ void showMenu( TrieNode& trieTitle, TrieNode& trieSynopsis, TrieNode& trieTags,
     auto it = find(options.begin(), options.end(), option);
 
     while (it == options.end()) {
-        cout << "########################################################################################################\n";
-        cout << "#                                                                                                      #\n";
-        cout << "#                                       WELCOME TO MOVIE STREAMING                                     #\n";
-        cout << "#                                           ~ Your Movie World ~                                       #\n";
-        cout << "#                                                                                                      #\n";
-        cout << "########################################################################################################\n";
-        cout << "#                                                                                                      #\n";
-        cout << "#      ________                   ________                 ________             ________               #\n";
-        cout << "#     |        |                 |        |               |        |            |       |              #\n";
-        cout << "#     |  MOVIE |                 | MOVIE  |               | MOVIE  |            | MOVIE |              #\n";
-        cout << "#     | POSTER |                 | POSTER |               | POSTER |            | POSTER|              #\n";
-        cout << "#     |_______ |                 |________|               |________|            |_______|              #\n";
-        cout << "#                                                                                                      #\n";
-        cout << "#                  Trending Now:         Watch Again:         Recommended for You:                     #\n";
-        cout << "#                   ______________          ______________          ______________                     #\n";
-        cout << "#                  |              |        |              |        |              |                    #\n";
-        cout << "#                  |   MOVIE A    |        |   MOVIE B    |        |   MOVIE C    |                    #\n";
-        cout << "#                  |______________|        |______________|        |______________|                    #\n";
-        cout << "#                                                                                                      #\n";
-        cout << "# ---------------------------------------------------------------------------------------------------- #\n";
-        cout << "#                                                                                                      #\n";
-        cout << "#                         [1] Search Movies  |  [2] Browse by Tags  |  [3] Watch Later                 #\n";
-        cout << "#                                                                                                      #\n";
-        cout << "#                                  [4] View Liked Movies   |   [5] Exit                                #\n";
-        cout << "#                                                                                                      #\n";
-        cout << "########################################################################################################\n";
-        cout << "#                                 Select an option to continue...                                      #\n";
-        cout << "########################################################################################################\n\n";
+        cout
+                << "########################################################################################################\n";
+        cout
+                << "#                                                                                                      #\n";
+        cout
+                << "#                                       WELCOME TO MOVIE STREAMING                                     #\n";
+        cout
+                << "#                                           ~ Your Movie World ~                                       #\n";
+        cout
+                << "#                                                                                                      #\n";
+        cout
+                << "########################################################################################################\n";
+        cout
+                << "#                                                                                                      #\n";
+        cout
+                << "#      ________                   ________                 ________             ________               #\n";
+        cout
+                << "#     |        |                 |        |               |        |            |       |              #\n";
+        cout
+                << "#     |  MOVIE |                 | MOVIE  |               | MOVIE  |            | MOVIE |              #\n";
+        cout
+                << "#     | POSTER |                 | POSTER |               | POSTER |            | POSTER|              #\n";
+        cout
+                << "#     |_______ |                 |________|               |________|            |_______|              #\n";
+        cout
+                << "#                                                                                                      #\n";
+        cout
+                << "#                  Trending Now:         Watch Again:         Recommended for You:                     #\n";
+        cout
+                << "#                   ______________          ______________          ______________                     #\n";
+        cout
+                << "#                  |              |        |              |        |              |                    #\n";
+        cout
+                << "#                  |   MOVIE A    |        |   MOVIE B    |        |   MOVIE C    |                    #\n";
+        cout
+                << "#                  |______________|        |______________|        |______________|                    #\n";
+        cout
+                << "#                                                                                                      #\n";
+        cout
+                << "# ---------------------------------------------------------------------------------------------------- #\n";
+        cout
+                << "#                                                                                                      #\n";
+        cout
+                << "#                         [1] Search Movies  |  [2] Browse by Tags  |  [3] Watch Later                 #\n";
+        cout
+                << "#                                                                                                      #\n";
+        cout
+                << "#                                  [4] View Liked Movies   |   [5] Exit                                #\n";
+        cout
+                << "#                                                                                                      #\n";
+        cout
+                << "########################################################################################################\n";
+        cout
+                << "#                                 Select an option to continue...                                      #\n";
+        cout
+                << "########################################################################################################\n\n";
         cout << "TIEMPO DE DURACION: " << duration.count() << " segundos\n";
         cin >> option;
 
@@ -185,7 +281,7 @@ void showMenu( TrieNode& trieTitle, TrieNode& trieSynopsis, TrieNode& trieTags,
             while (iss >> word) {
                 vector<string> results = trieTitle.searchByPrefix(word);
                 vector<string> results2 = trieSynopsis.searchByPrefix(word);
-                AsignedMovies(mapa_ids , trieTitle, trieSynopsis, trieTags, duration, results);
+                AsignedMovies(mapa_ids, trieTitle, trieSynopsis, trieTags, duration, results);
             }
         } else if (option == 2) {
             string tag;
@@ -196,7 +292,14 @@ void showMenu( TrieNode& trieTitle, TrieNode& trieSynopsis, TrieNode& trieTags,
             cin.ignore();
             getline(cin, tag);
             vector<string> results = trieTags.searchByPrefix(tag);
-            AsignedMovies(mapa_ids , trieTitle, trieSynopsis, trieTags, duration, results);
+            AsignedMovies(mapa_ids, trieTitle, trieSynopsis, trieTags, duration, results);
+        } else if (option == 4){
+                ifstream archLikesLeer("../listaLikes.txt",ios::in);
+                if (!archLikesLeer.is_open()) {
+                    cout << "No se han registrado likes." << endl;
+                }else{
+                    showLikes(archLikesLeer);
+                }
         } else if (option == 5) {
             GenerateSpaces();
             cout << "--------------------------------------------------------------------------------" << endl;
