@@ -12,24 +12,24 @@ class Memento {
 private:
     vector<Movie*> current5movies;
 public:
-    //Memento();
     explicit Memento(vector<Movie*> &movies5) {
         current5movies = movies5;
-    } // despues sino le ponemos const
+    }
 
-    string getState() const {
-        vector<Movie*> sortedMovies = current5movies;
-
+    void order() {
         // Ordenar el vector de mayor a menor peso
-        sort(sortedMovies.begin(), sortedMovies.end(), []( Movie* a,  Movie* b) {
+        sort(current5movies.begin(), current5movies.end(), []( Movie* a,  Movie* b) {
             return a->verifyPeso() > b->verifyPeso(); // Comparar de mayor a menor
         });
+    }
 
+    string getState() {
         // Generar el string de salida con las películas ordenadas
+        order();
         string result = "Peliculas ordenadas:\n";
-        for (size_t i = 0; i < sortedMovies.size(); ++i) {
-            result += to_string(i + 1) + ". " + sortedMovies[i]->getTitulo() +
-                      " (Peso: " + to_string(sortedMovies[i]->verifyPeso()) + ")\n";
+        for (size_t i = 0; i < current5movies.size(); ++i) {
+            result += to_string(i + 1) + ". " + current5movies[i]->getTitulo() +
+                      " (Peso: " + to_string(current5movies[i]->verifyPeso()) + ")\n";
         }
 
         return result;

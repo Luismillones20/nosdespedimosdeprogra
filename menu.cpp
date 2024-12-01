@@ -77,6 +77,7 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa,
         cout << "------------------------------------------------------------------------------------------------------\n";
 
         // Mostrar el estado actual del historial
+        historial.orderEstados();
         historial.printEstadoActual(counter);
 
         // Mostrar opciones
@@ -91,16 +92,16 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa,
         cin >> option;
         if (option >= 1 && option <= 5) {
             // Mostrar sinopsis de la película seleccionada
-            const auto& estados = historial.getter_estados();
+            auto& estados = historial.getter_estados();
             if (!estados.empty() && counter < static_cast<int>(estados.size())) {
-                const Memento& estado_actual = estados[counter];
+                Memento& estado_actual = estados[counter];
+                estado_actual.order(); //ordenamos la lista de movies de acuerdo al peso
                 showSynopsis( estado_actual.getSynopsis(option - 1));
                 int e;
                 cin >> e;
                 while(e == 1 || e==2){
-                    auto actual = historial.getter_estados();
-                    if(e==1)actual[counter].like(option-1);
-                    else if(e==2)actual[counter].later(option-1);
+                    if(e==1)estado_actual.like(option-1);
+                    else if(e==2)estado_actual.later(option-1);
                     showSynopsis(estado_actual.getSynopsis(option - 1));
                     cin >> e;
                 }
