@@ -51,10 +51,39 @@ void GetCorrectGetLines(ifstream  &file, string &temp) {
     bool insideQuotes = false;
     char ch;
     while (file.get(ch)) {
-        if (ch == '"') insideQuotes = !insideQuotes;
-        else if (ch == ',' && !insideQuotes) break;
-        temp += ch;
+        if (ch == '"') insideQuotes = !insideQuotes; // Lee un " y lo cambia de true a false o viceversa.
+            // En caso haya "", ocurre: true->false->true (no queda en false)
+        else if (ch == ',' && !insideQuotes) break; // Si encuentra una coma y ya no se está dentro de las comillas,
+            // entonces detiene el recorrido de caracteres.
+        else temp += ch;
     }
+}
+
+void GetCorrectTitleAndTag(ifstream& file, string& tempTags){
+    bool insideQuotes = false;
+    bool thereAreQuotationMarks = false;
+    char ch;
+    while (file.get(ch)) {
+        if (ch == '"'){
+            insideQuotes = !insideQuotes; // Lee un " y lo cambia de true a false o viceversa.
+            thereAreQuotationMarks = true;
+        }
+            // En caso haya "", ocurre: true->false->true (no queda en false)
+        else if (ch == ',' && !insideQuotes) break; // Si encuentra una coma y ya no se está dentro de las comillas,
+            // entonces detiene el recorrido de caracteres.
+
+        else if (ch == ',' && !thereAreQuotationMarks) break; // En caso haya un solo tag, en el momento
+            // que se lee la primera coma, se deja de añadir los caracteres
+
+        else{
+            if(ch != ',') tempTags += ch;
+        }
+    }
+
+    //Lo que lee y manda esto al final es un string completo:
+    // ej: En caso haya un solo tag, envía -> horror
+    // ej: En caso haya varios tags, envía -> horror, action, dark, violence (todo como un solo string)
+
 }
 
 void InsertWordByWordToTheTrie(string& text, TrieNode& trie, const string& id) {
@@ -96,19 +125,22 @@ int main() {
     string primeraLinea;
     getline(file, primeraLinea);
     while (getline(file, id, ',')) {
-        getline(file, title, ',');
+        string tempTitle;
+        GetCorrectTitleAndTag(file, tempTitle);
+        title = tempTitle;
+
         string tempSynopsis;
         GetCorrectGetLines(file, tempSynopsis); // esta función garantiza que tienen que cerrarse las comillas para que recien se pueda pasar al siguiente getline
         size_t doubleQuotePos;
-        while ((doubleQuotePos = tempSynopsis.find("\"\"")) != string::npos) { // string ::npos (si es true, es porque lo encontro, y vicerversa)
+        while ((doubleQuotePos = tempSynopsis.find("\"\"")) != string::npos) { // string ::npos (si es true, es porque lo encontró, y viceversa)
             tempSynopsis.replace(doubleQuotePos, 2, "\""); // reemplaza los siguientes dos caracteres con "\""
         }
         plot_synopsis = tempSynopsis;
 
         string tempTags;
-        GetCorrectGetLines(file, tempTags); // al ser una coma enumerativa, tiene que esperar a que termine la comilla
-
+        GetCorrectTitleAndTag(file, tempTags);(file, tempTags); // al ser una coma enumerativa, tiene que esperar a que termine la comilla
         tags = tempTags;
+
         mapa_ids[id] = new Movie(id,title, plot_synopsis);
         getline(file, split, ',');
         getline(file, synopsis_source, '\n');
