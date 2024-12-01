@@ -12,4 +12,5 @@ add_executable(nosdespedimosdeprogra
         Memento.h
         Historial.h
         Archivo.h
-        Movie.h)
+        Movie.h
+        "FuncionesMenu.h")
