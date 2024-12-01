@@ -18,6 +18,12 @@ public:
         estados.push_back(estado);
     }
 
+    void orderEstados() {
+        for(auto estado: estados){
+            estado.order();
+        }
+    }
+
     Memento getEstadoAnterior() {
         if (estados.size() > 1) {
             estados.pop_back();

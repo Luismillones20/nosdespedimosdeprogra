@@ -14,7 +14,7 @@ private:
     string id;
     string name;
     string sinopsis;
-    int peso;
+    int peso = 0;
     bool like;
     bool forLater;
 public:
