@@ -38,5 +38,6 @@ Lo que hace es insertar caracter a caracter en un árbol, ya sea en el TrieTitle
 
 
 
-
+## Link Video:
+  https://drive.google.com/drive/folders/1rlhTjliY6vIhgXSjpQ3aeGyPw4a1E13B?usp=sharing
 
