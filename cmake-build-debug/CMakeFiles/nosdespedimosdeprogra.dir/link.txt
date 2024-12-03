@@ -1,1 +1,0 @@
-/usr/bin/c++ -g CMakeFiles/nosdespedimosdeprogra.dir/menu.cpp.o CMakeFiles/nosdespedimosdeprogra.dir/proyecto_final.cpp.o CMakeFiles/nosdespedimosdeprogra.dir/Trie.cpp.o -o nosdespedimosdeprogra
