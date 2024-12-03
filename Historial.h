@@ -7,6 +7,11 @@
 #include <vector>
 #include <iostream>
 #include <Memento.h>
+
+#include <mutex>
+std::mutex historial_mutex;
+
+
 using namespace std;
 
 class Historial {
@@ -52,4 +57,9 @@ public:
     //~Historial();
 };
 
+
+void threadSafeAddToHistorial(Historial& historial, const Memento& memento) {
+    std::lock_guard<std::mutex> lock(historial_mutex);
+    historial.agregarEstado(memento);
+}
 #endif //HISTORIAL_H

@@ -25,7 +25,7 @@ void showSynopsis(string sinopsis) {
     cout << "        Presione una numero diferente para poder volver a la pagina anterior    " << endl;
     cout << "--------------------------------------------------------------------------------" << endl;
 }
-
+// ----
 void showLikes(ifstream& file){
     string line, id, c, nombre;
     getline(file, line);

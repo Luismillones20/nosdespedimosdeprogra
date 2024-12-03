@@ -6,7 +6,7 @@
 #include <chrono>
 
 #include "Movie.h"
-#include "trie.h"
+#include "Trie.h"
 using namespace std;
 void showMenu(
         TrieNode& trieTitle,
