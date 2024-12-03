@@ -41,5 +41,10 @@ public:
 
     // Método de depuración para imprimir el Trie
     void print();
+
+    void parallelFindWordsWithPrefix(const vector<string> &prefixes, vector<vector<string>> &results);
 };
+
+void parallelFindWordsWithPrefix(const std::vector<std::string>& prefixes, std::vector<std::vector<std::string>>& results);
+
 #endif //PROGRA3_8_TRIE_H
