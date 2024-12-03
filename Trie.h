@@ -5,14 +5,14 @@
 #include <unordered_set>
 #include <vector>
 #include <string>
-
+#include <set>
 constexpr int N = 256;
 using namespace std;
 
 class TrieNode {
 private:
-    unordered_set<int> movieIds; // IDs de películas donde aparece esta palabra
-    string ID;
+    set<string> movieIds; // IDs de películas donde aparece esta palabra
+    // string ID;
     char data; // Almacena el carácter del nodo (solo para fines de depuración o impresión)
     TrieNode* children[N];
     bool is_leaf;
@@ -46,5 +46,4 @@ public:
 };
 
 void parallelFindWordsWithPrefix(const std::vector<std::string>& prefixes, std::vector<std::vector<std::string>>& results);
-
 #endif //PROGRA3_8_TRIE_H

@@ -1,5 +1,4 @@
 #include "Trie.h"
-
 #include <future>
 #include <iostream>
 #include <sstream>
@@ -29,8 +28,11 @@ TrieNode* TrieNode::insert(const string& word, const string& id) {
         temp = temp->children[idx];
     }
     temp->is_leaf = true;
-    temp->ID = id;
-    return this;
+
+    // temp->ID = id;
+    if (temp->movieIds.find(id) == temp->movieIds.end()) {
+        temp->movieIds.insert(id);
+    }    return this;
 }
 
 // Busca una palabra en el Trie
@@ -47,6 +49,7 @@ bool TrieNode::search(const string& word) {
 }
 
 // Encuentra el prefijo más largo que no diverge en el Trie
+
 string TrieNode::find_longest_prefix(const string& word) {
     if (word.empty()) return "";
 
@@ -143,7 +146,9 @@ void TrieNode::findAllWords(TrieNode* trieNode, string currentWord, vector<strin
     if (trieNode == nullptr) return;
 
     if (trieNode->is_leaf) {
-        result.push_back(trieNode->ID);
+        for (auto id: movieIds){
+            result.push_back(id);
+        }
     }
 
     for (int i = 0; i < N; i++) {
@@ -162,6 +167,7 @@ vector<string> TrieNode::searchByPrefix(const string& prefix) {
 }
 
 // Imprime el Trie (para depuración)
+
 void TrieNode::print() {
     if (this) {
         cout << this->data << " -> ";
