@@ -5,9 +5,14 @@
 #ifndef MOVIE_H
 #define MOVIE_H
 #include <iostream>
-#include <set>
 #include <utility>
 using namespace std;
+//Que se implementara para el archivo Observer
+class Observer {
+public:
+    virtual void update(const string& movieId, const string& action) = 0;
+    virtual ~Observer() = default;
+};
 
 class Movie {
 private:
@@ -17,23 +22,41 @@ private:
     int peso = 0;
     bool like = false;
     bool forLater = false;
+    vector<Observer*> observers; // Lista de observadores
 public:
     Movie(){}
     Movie(string id_, string name_, string sino_): id(std::move(id_)), name(std::move(name_)),sinopsis(std::move(sino_)){
     }
 
-    int verifyPeso() {
-        return peso;
+    void addObserver(Observer* observer) {
+        observers.push_back(observer);
     }
 
+    void notifyObservers(const string& action) {
+        for (auto* observer : observers) {
+            observer->update(id, action);
+        }
+    }
+
+    // Métodos originales con notificación
     void givelike() {
-        like = true;
-        peso+=5;
+        if (!like) {
+            like = true;
+            peso += 5;
+            notifyObservers("like");
+        }
     }
 
     void addLater() {
-        forLater = true;
-        peso+=3;
+        if (!forLater) {
+            forLater = true;
+            peso += 3;
+            notifyObservers("addLater");
+        }
+    }
+
+    int verifyPeso() {
+        return peso;
     }
 
     bool hasLater() {

@@ -4,8 +4,8 @@
 #include <vector>
 #include <unordered_map>
 #include <chrono>
-
 #include "Movie.h"
+#include "Observer.h"
 #include "Trie.h"
 using namespace std;
 void showMenu(
@@ -20,5 +20,6 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa,
                    TrieNode& trieSynopsis,
                    TrieNode& trieTags,
                    chrono::duration<double> duration,
+                   FavoritesManager& favManager,
                    const Vectors&... vector_ids);
 #endif //PROGRA3_MENU_H
