@@ -8,6 +8,7 @@
 #include <fstream>
 #include "Movie.h"
 #include <FuncionesMenu.h>
+#include <future>
 using namespace std;
 
 template <typename... Vectors>
@@ -155,70 +156,21 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa,
     }
 }
 
-void showMenu( TrieNode& trieTitle, TrieNode& trieSynopsis, TrieNode& trieTags,
-               const unordered_map<string, Movie*>& mapa_ids,
-               chrono::duration<double> duration) {
+void showMenu(TrieNode& trieTitle, TrieNode& trieSynopsis, TrieNode& trieTags,
+              const unordered_map<string, Movie*>& mapa_ids,
+              chrono::duration<double> duration) {
     int option = 0;
     vector<int> options = {1, 2, 3, 4, 5, 6};
     auto it = find(options.begin(), options.end(), option);
 
     while (it == options.end()) {
-        cout
-                << "########################################################################################################\n";
-        cout
-                << "#                                                                                                      #\n";
-        cout
-                << "#                                       WELCOME TO MOVIE STREAMING                                     #\n";
-        cout
-                << "#                                           ~ Your Movie World ~                                       #\n";
-        cout
-                << "#                                                                                                      #\n";
-        cout
-                << "########################################################################################################\n";
-        cout
-                << "#                                                                                                      #\n";
-        cout
-                << "#      ________                   ________                 ________             ________               #\n";
-        cout
-                << "#     |        |                 |        |               |        |            |       |              #\n";
-        cout
-                << "#     |  MOVIE |                 | MOVIE  |               | MOVIE  |            | MOVIE |              #\n";
-        cout
-                << "#     | POSTER |                 | POSTER |               | POSTER |            | POSTER|              #\n";
-        cout
-                << "#     |_______ |                 |________|               |________|            |_______|              #\n";
-        cout
-                << "#                                                                                                      #\n";
-        cout
-                << "#                  Trending Now:         Watch Again:         Recommended for You:                     #\n";
-        cout
-                << "#                   ______________          ______________          ______________                     #\n";
-        cout
-                << "#                  |              |        |              |        |              |                    #\n";
-        cout
-                << "#                  |   MOVIE A    |        |   MOVIE B    |        |   MOVIE C    |                    #\n";
-        cout
-                << "#                  |______________|        |______________|        |______________|                    #\n";
-        cout
-                << "#                                                                                                      #\n";
-        cout
-                << "# ---------------------------------------------------------------------------------------------------- #\n";
-        cout
-                << "#                                                                                                      #\n";
-        cout
-                << "#                         [1] Search Movies  |  [2] Browse by Tags  |  [3] Watch Later                 #\n";
-        cout
-                << "#                                                                                                      #\n";
-        cout
-                << "#                                  [4] View Liked Movies   |   [5] Exit                                #\n";
-        cout
-                << "#                                                                                                      #\n";
-        cout
-                << "########################################################################################################\n";
-        cout
-                << "#                                 Select an option to continue...                                      #\n";
-        cout
-                << "########################################################################################################\n\n";
+        cout << "########################################################################################################\n";
+        cout << "#                                       WELCOME TO MOVIE STREAMING                                     #\n";
+        cout << "#                                           ~ Your Movie World ~                                       #\n";
+        cout << "########################################################################################################\n";
+        cout << "#                         [1] Search Movies  |  [2] Browse by Tags  |  [3] Watch Later                 #\n";
+        cout << "#                                  [4] View Liked Movies   |   [5] Exit                                #\n";
+        cout << "########################################################################################################\n\n";
         cout << "TIEMPO DE DURACION: " << duration.count() << " segundos\n";
         cin >> option;
 
@@ -232,12 +184,35 @@ void showMenu( TrieNode& trieTitle, TrieNode& trieSynopsis, TrieNode& trieTags,
             getline(cin, busqueda);
             istringstream iss(busqueda);
             string word;
-            GenerateSpaces();
+            vector<string> words;
             while (iss >> word) {
-                vector<string> results = trieTitle.searchByPrefix(word);
-                vector<string> results2 = trieSynopsis.searchByPrefix(word);
-                AsignedMovies(mapa_ids, trieTitle, trieSynopsis, trieTags, duration, results);
+                words.push_back(word);
             }
+
+            // Búsquedas concurrentes
+            vector<future<vector<string>>> futures;
+            for (const string& w : words) {
+                futures.push_back(async(launch::async, [&trieTitle, w]() {
+                    return trieTitle.searchByPrefix(w);
+                }));
+                futures.push_back(async(launch::async, [&trieSynopsis, w]() {
+                    return trieSynopsis.searchByPrefix(w);
+                }));
+                futures.push_back(async(launch::async, [&trieTags, w]() {
+                    return trieTags.searchByPrefix(w);
+                }));
+            }
+
+            // Recuperar resultados de manera concurrente
+            vector<string> allResults;
+            for (auto& f : futures) {
+                vector<string> partialResults = f.get();
+                allResults.insert(allResults.end(), partialResults.begin(), partialResults.end());
+            }
+
+            // Procesar resultados
+            AsignedMovies(mapa_ids, trieTitle, trieSynopsis, trieTags, duration, allResults);
+
         } else if (option == 2) {
             string tag;
             GenerateSpaces();
@@ -246,25 +221,32 @@ void showMenu( TrieNode& trieTitle, TrieNode& trieSynopsis, TrieNode& trieTags,
             cout << "--------------------------------------------------------------------------------" << endl;
             cin.ignore();
             getline(cin, tag);
-            vector<string> results = trieTags.searchByPrefix(tag);
+
+            // Búsqueda concurrente
+            auto task = async(launch::async, [&trieTags, &tag]() {
+                return trieTags.searchByPrefix(tag);
+            });
+
+            vector<string> results = task.get();
             AsignedMovies(mapa_ids, trieTitle, trieSynopsis, trieTags, duration, results);
-        } else if(option == 3){
-            ifstream archVerMasTardeLeer("../listaVerMasTarde.txt",ios::in);
+
+        } else if (option == 3) {
+            ifstream archVerMasTardeLeer("../listaVerMasTarde.txt", ios::in);
             if (!archVerMasTardeLeer.is_open()) {
                 cout << "No se han registrado Ver Mas Tarde." << endl;
-            }else{
+            } else {
                 showWatchLater(archVerMasTardeLeer);
                 archVerMasTardeLeer.close();
-                callMenuAgain(trieTitle,trieSynopsis, trieTags,mapa_ids,duration);
+                callMenuAgain(trieTitle, trieSynopsis, trieTags, mapa_ids, duration);
             }
-        }else if (option == 4){
+        } else if (option == 4) {
             ifstream archLikesLeer("../listaLikes.txt", ios::in);
             if (!archLikesLeer.is_open()) {
                 cout << "No se han registrado likes." << endl;
             } else {
                 showLikes(archLikesLeer);
                 archLikesLeer.close();
-                callMenuAgain(trieTitle,trieSynopsis, trieTags,mapa_ids,duration);
+                callMenuAgain(trieTitle, trieSynopsis, trieTags, mapa_ids, duration);
             }
         } else if (option == 5) {
             GenerateSpaces();
@@ -272,13 +254,12 @@ void showMenu( TrieNode& trieTitle, TrieNode& trieSynopsis, TrieNode& trieTags,
             cout << "                Gracias por usar Movie Streaming. ¡Hasta luego!" << endl;
             cout << "--------------------------------------------------------------------------------" << endl;
             break;
-        } else if(option == 6){
+        } else if (option == 6) {
             cout << "--------------------------------------------------------------------------------" << endl;
             cout << "                   Presiona 6 para volver al Menu Principal                     " << endl;
             cout << "--------------------------------------------------------------------------------" << endl;
-            cin>>option;
-        }
-        else {
+            cin >> option;
+        } else {
             cout << "--------------------------------------------------------------------------------" << endl;
             cout << "                           Opción no válida. Intente nuevamente.\n";
             cout << "--------------------------------------------------------------------------------" << endl;

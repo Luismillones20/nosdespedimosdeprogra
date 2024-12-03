@@ -151,9 +151,15 @@ int main() {
         //InsertWordByWordToTheTrie(title, trieTitle,id);
         //InsertWordByWordToTheTrie(plot_synopsis, trieSynopsis,id);
         // InsertWordByWordToTheTrie(tags,trieTags, id);
-        SafeInsertWordByWordToTheTrie(title, trieTitle, id);
-        SafeInsertWordByWordToTheTrie(plot_synopsis, trieSynopsis, id);
-        SafeInsertWordByWordToTheTrie(tags, trieTags, id);
+        std::thread threadTitle(SafeInsertWordByWordToTheTrie, ref(title), ref(trieTitle), ref(id));
+        std::thread threadSynopsis(SafeInsertWordByWordToTheTrie, ref(plot_synopsis), ref(trieSynopsis), ref(id));
+        std::thread threadTags(SafeInsertWordByWordToTheTrie, ref(tags), ref(trieTags), ref(id));
+
+        // Esperar a que terminen los hilos
+        threadTitle.join();
+        threadSynopsis.join();
+        threadTags.join();
+
 
         //GetWordByWord(plot_synopsis, trieSynopsis, 2);
         //thread1.join();
