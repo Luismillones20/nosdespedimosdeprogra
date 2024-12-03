@@ -13,4 +13,6 @@ add_executable(nosdespedimosdeprogra
         Historial.h
         Archivo.h
         Movie.h
-        "FuncionesMenu.h")
+        FuncionesMenu.h
+        Observer.h
+        Decorator.h)

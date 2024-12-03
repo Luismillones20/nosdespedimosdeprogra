@@ -227,7 +227,6 @@ void modifyLikesAndForLater(Movie* &movie, const string& id,
         }
     }
 }
-template <typename... Vectors>
 void callMenuAgain(TrieNode& trieTitle, TrieNode& trieSynopsis, TrieNode& trieTags,
                const unordered_map<string, Movie*>& mapa_ids,
                chrono::duration<double> duration) {
