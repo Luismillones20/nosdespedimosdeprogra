@@ -8,7 +8,7 @@
 #include <set>
 #include <thread>
 #include <mutex>
-#include "trie.h"
+#include "Trie.h"
 #include <algorithm>
 #include "menu.h"
 #include <Archivo.h>
@@ -111,6 +111,7 @@ void InsertDataConcurrently(vector<string> &texts, TrieNode &trie, vector<string
 }
 
 int main() {
+    auto start_time = std::chrono::high_resolution_clock::now();
     Archivo& archivo = Archivo::getArchivo("../mpst_full_data (1).csv");
     ifstream& file = archivo.getFile();
 
@@ -162,6 +163,7 @@ int main() {
     chrono::duration<double> duration = end - start;
     showMenu(trieTitle, trieSynopsis, trieTags, mapa_ids, duration);
     file.close(); // Para cerrar el archivo (es buena práctica)
+
     return 0;
 } // comentarioxd
 // FALTA ARREGLAR LA FUNCION DE QUE RECIBA VARIOS A LA VEZ// FALTA ARREGLAR LA FUNCION DE QUE RECIBA VARIOS A LA VEZ

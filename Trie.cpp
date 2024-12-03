@@ -1,4 +1,6 @@
-#include "trie.h"
+#include "Trie.h"
+
+#include <future>
 #include <iostream>
 #include <sstream>
 
@@ -168,5 +170,17 @@ void TrieNode::print() {
                 children[i]->print();
             }
         }
+    }
+}
+
+void TrieNode::parallelFindWordsWithPrefix(const vector<string>& prefixes, vector<vector<string>>& results) {
+    vector<future<void>> futures;
+    for (size_t i = 0; i < prefixes.size(); ++i) {
+        futures.push_back(std::async(std::launch::async, [this, &prefixes, &results, i]() {
+            findWordsWithPrefix(prefixes[i], results[i]);
+        }));
+    }
+    for (auto& f : futures) {
+        f.get(); // Asegurarse de que todos los hilos terminen antes de continuar
     }
 }
