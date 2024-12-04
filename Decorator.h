@@ -6,6 +6,7 @@
 #define DECORATOR_H
 #include <string>
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include <unordered_map>
 #include "Movie.h"
@@ -28,10 +29,12 @@ public:
         cout << "======================================================\n";
         for (const auto& id : movieIds) {
             if (movieMap.find(id) != movieMap.end()) {
-                cout << "🎥 " << movieMap.at(id)->getTitulo() << " | ID: " << id << endl;
+                cout << " " << setw(30)<<left<< movieMap.at(id)->getTitulo() << right << " | ID: " << id << endl;
             }
         }
-        cout << "===========================\n";
+        cout << "======================================================\n";
+        cout<<endl;
+        cout<<"* Ingrese un numero para volver al menu principal *"<<endl;
     }
 };
 
@@ -39,15 +42,17 @@ public:
 class VerMasTardeDecorator : public Decorator {
 public:
     void display(const vector<string>& movieIds, const unordered_map<string, Movie*>& movieMap) const override {
-        cout << "\n======================================================\n";
+        cout << "\n=======================================================\n";
         cout << "                  ⏳ Ver Mas Tarde ⏳   \n";
-        cout << "======================================================\n";
+        cout << "=======================================================\n";
         for (const auto& id : movieIds) {
             if (movieMap.find(id) != movieMap.end()) {
-                cout << "📽️ " << movieMap.at(id)->getTitulo() << " | ID: " << id << endl;
+                cout << "📽️ " << setw(30)<<left<<movieMap.at(id)->getTitulo() << right<<" | ID: " << id << endl;
             }
         }
-        cout << "===========================\n";
+        cout << "======================================================\n";
+        cout<<endl;
+        cout<<"* Ingrese un numero para volver al menu principal *"<<endl;
     }
 };
 #endif //DECORATOR_H
