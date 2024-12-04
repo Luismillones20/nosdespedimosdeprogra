@@ -70,7 +70,8 @@ public:
     void loadLikes() {
         ifstream inFile(likesFile, ios::in);
         if (!inFile.is_open()) {
-            cout << "No se encontro el archivo de likes. Se creara uno nuevo." << endl;
+            cout << "         No se encontro el archivo de Likes " << endl;
+            cout << "Se creara uno nuevo al agregar una pelicula a la lista."<<endl;
             return;
         }
 
@@ -91,7 +92,8 @@ public:
     void loadWatchLater() {
         ifstream inFile(watchLaterFile, ios::in);
         if (!inFile.is_open()) {
-            cout << "No se encontro el archivo de 'ver mas tarde'. Se creara uno nuevo." << endl;
+            cout << "      No se encontro el archivo de 'Ver mas Tarde' " << endl;
+            cout << "Se creara uno nuevo al agregar una pelicula a la lista."<<endl;
             return;
         }
 
@@ -120,7 +122,7 @@ public:
 
     void saveWatchLater() const {
         ofstream outFile(watchLaterFile, ios::out);
-        outFile << "Lista para ver mss tarde:\n";
+        outFile << "Lista para ver mas tarde:\n";
         for (const auto& id : watchLater) {
             outFile << id << " - " << movieMap.at(id)->getTitulo() << endl;
         }

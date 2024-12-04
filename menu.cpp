@@ -33,6 +33,7 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa, // Mapa <id, Movie
 
     // Lambda para procesar y cargar las películas
     auto process_id = [&](const string& id) -> bool {
+
         auto it = mapa.find(id);
         // Devuelve un iterator con la posicion de ese id en el mapa <id, Movie>
 
@@ -41,18 +42,6 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa, // Mapa <id, Movie
 
             // Se crea una instancia de Movie y se le asigna los valores de la pelicula encontrada en el mapa:
             Movie* movie = it->second;
-
-            //Agregar valores de Likeado y Ver mas tarde:
-            modifyLikesAndForLater(movie, id, vecLikesExistentes, vecForLaterExistentes);
-
-            if (favManager.isLiked(movie->getId())) {
-                movie->setLike(true);
-                movie->setPeso(movie->getPeso() + 5);
-            }
-            if (favManager.isWatchLater(movie->getId())) {
-                movie->setForLater(true);
-                movie->setPeso(movie->getPeso() + 3);
-            }
 
             // Se agrega la pelicula al vector de movies_5 (para juntar las 5 peliculas de la página a mostrar)
             movies_5.push_back(movie);
@@ -279,23 +268,11 @@ void showMenu( TrieNode& trieTitle, TrieNode& trieSynopsis, TrieNode& trieTags,
             vector<string> results = trieTags.searchByPrefix(tag);
             AsignedMovies(mapa_ids, trieTitle, trieSynopsis, trieTags, duration, *favManager, results);
         } else if(option == 3){
-            // ifstream archVerMasTardeLeer("../listaVerMasTarde.txt",ios::in);
-            // if (!archVerMasTardeLeer.is_open()) {
-            //     cout << "No se han registrado Ver Mas Tarde." << endl;
-            // }else{
-            //     showWatchLater(archVerMasTardeLeer);
-            //     archVerMasTardeLeer.close();
-            // }
+
             favManager->showMasTardeDecorator(vmt_decorator);
             callMenuAgain(trieTitle,trieSynopsis, trieTags,mapa_ids,duration);
         }else if (option == 4){
-            // ifstream archLikesLeer("../listaLikes.txt", ios::in);
-            // if (!archLikesLeer.is_open()) {
-            //     cout << "No se han registrado likes." << endl;
-            // } else {
-            //     showLikes(archLikesLeer);
-            //     archLikesLeer.close();
-            // }
+
             favManager->showLikesDecorator(like_decorator);
             callMenuAgain(trieTitle,trieSynopsis, trieTags,mapa_ids,duration);
         } else if (option == 5) {
