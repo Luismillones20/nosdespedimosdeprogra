@@ -24,6 +24,7 @@ void showSynopsis(string sinopsis) {
     cout << "                 1.Dar Like            2.Agregar a Ver Mas Tarde                " << endl;
     cout << "        Presione una numero diferente para poder volver a la pagina anterior    " << endl;
     cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "Ingrese el numero: ";
 }
 // ----
 void showLikes(ifstream& file){

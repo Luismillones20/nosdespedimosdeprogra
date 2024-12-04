@@ -110,6 +110,7 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa, // Mapa <id, Movie
         cout << "7.                 Regresar al menu principal.\n";
         cout << "8.                 Volver al grupo anterior de peliculas.\n";
         cout << "------------------------------------------------------------------------------------------------------\n";
+        cout << "Ingrese el numero: ";
         cin >> option;
         if (option >= 1 && option <= 5) {
             // Mostrar sinopsis de la película seleccionada
