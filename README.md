@@ -22,7 +22,7 @@ Lo que hace es insertar caracter a caracter en un árbol, ya sea en el TrieTitle
 
 ### Funciones básicas de menu.cpp:
 - #### AsignedMovies():
-- #### ShowMovies():
+- #### ShowMovies(): 
 ### Funciones básicas de proyecto.cpp: 
 
 - #### `GetCorrectGetLines()`
