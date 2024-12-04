@@ -25,11 +25,6 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa, // Mapa <id, Movie
     Historial historial;              // Objeto para manejar los estados
     int counter = 0;                  // Contador para gestionar estados del historial
 
-    vector<string> vecLikesExistentes;
-    vector<string> vecForLaterExistentes;
-
-    llenarVecLikesExistentes(vecLikesExistentes);
-    llenarVecForLaterExistentes(vecForLaterExistentes);
 
     // Lambda para procesar y cargar las películas
     auto process_id = [&](const string& id) -> bool {
