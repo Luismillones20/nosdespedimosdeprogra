@@ -12,7 +12,7 @@
 
 using namespace std;
 
-class FavoritesManager {
+class FavoritesManager : public Observer{
     unordered_map<string, Movie*> movieMap; // Mapa de ID a Movie
     set<string> favorites;                 // IDs de películas con like
     set<string> watchLater;                // IDs de películas para ver más tarde
@@ -20,6 +20,7 @@ class FavoritesManager {
     const string watchLaterFile = "../listaVerMasTarde.txt";
 
 public:
+    void update(const string& movieId, const string& action) override{};
     FavoritesManager(unordered_map<string, Movie*> movieMap_) : movieMap(std::move(movieMap_)) {
         loadLikes();
         loadWatchLater();
