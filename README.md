@@ -294,3 +294,40 @@ https://drive.google.com/drive/folders/1rlhTjliY6vIhgXSjpQ3aeGyPw4a1E13B?usp=sha
   El problema que se tuvo con el agrupamiento de IDs correspondía a solucionar el hecho de que hubieran películas con mismas palabras o partes de palabras ya sea en los títulos o en las sinopsis. Lo que se buscó fue agregar un conjunto (ya sea un vector, set, arreglo) de IDs al final de cada palabra para que se indicara en qué películas se encontraba la palabra buscada. Sin embargo, al intentar implementar la función se presentó un `SIGNAL ERROR` que resultaba al intentar ingresar los IDs uno por uno al vector de IDs presente en cada caracter de final de palabra (en el nodo). Se intentó rehacer el código de implementación, pero el error persistió y esto imposibilitó que se pudiese mostrar más de una película asociada a una palabra (tanto al buscar películas por título/sinopsis como al buscar por tags).
 
   Este error corresponde a cuando se lee el archivo .csv y se guardan las palabras. El ID se actualiza cuando se lee una palabra igual a la que ya tenía un ID. Por esta razón, al buscar "Shrek", solo sale "Shrek 2", el cual está más al final en el archivo. Lo mismo ocurre al buscar por tags: si se ingresa "horr" o "horror", solo se muestra la última película que tuvo entre el tag "horror".
+
+
+
+# Referencias
+
+1. *Sorber, J. (2023).*  
+   C++ The Trie Data Structure (Prefix Tree) [Video]. YouTube.  
+   [https://www.youtube.com/watch?v=3CbFFVHQrk4&t=772s&ab_channel=JacobSorber](https://www.youtube.com/watch?v=3CbFFVHQrk4&t=772s&ab_channel=JacobSorber)
+
+2. *Refactoring Guru. (2024).*  
+   Decorator: Patrón de diseño (secciones "Estructura" y "Pseudocódigo"). Refactoring Guru.  
+   [https://refactoring.guru/es/design-patterns/decorator](https://refactoring.guru/es/design-patterns/decorator)
+
+3. *DigitalOcean. (s.f.).*  
+   Trie Data Structure in C++ (secciones "Implementing a Trie Data Structure in C/C++" y "Time Complexity for the above Procedures"). DigitalOcean.  
+   [https://www.digitalocean.com/community/tutorials/trie-data-structure-in-c-plus-plus](https://www.digitalocean.com/community/tutorials/trie-data-structure-in-c-plus-plus)
+
+4. *Refactoring Guru. (2024).*  
+   Singleton: Patrón de diseño (secciones "Pseudocódigo" y "Esquema"). Refactoring Guru.  
+   [https://refactoring.guru/es/design-patterns/singleton](https://refactoring.guru/es/design-patterns/singleton)
+
+5. *Refactoring Guru. (2024).*  
+   Memento: Patrón de diseño (secciones "Esquema" y "Pseudocódigo"). Refactoring Guru.  
+   [https://refactoring.guru/es/design-patterns/memento](https://refactoring.guru/es/design-patterns/memento)
+
+6. *Refactoring Guru. (2024).*  
+   Observer: Patrón de diseño (secciones "Esquema" y "Pseudocódigo"). Refactoring Guru.  
+   [https://refactoring.guru/es/design-patterns/observer](https://refactoring.guru/es/design-patterns/observer)
+
+7. *Cplusplus.com. (s.f.).*  
+   std::find (secciones "Find value in range" y "Parameters"). Cplusplus.com.  
+   [https://cplusplus.com/reference/algorithm/find/](https://cplusplus.com/reference/algorithm/find/)
+
+8. *GeeksforGeeks. (s.f.).*  
+   map::find function in C++ STL (secciones "Syntax" y "Example of map::find()"). GeeksforGeeks.  
+   [https://www.geeksforgeeks.org/map-find-function-in-c-stl/](https://www.geeksforgeeks.org/map-find-function-in-c-stl/)
+   }
