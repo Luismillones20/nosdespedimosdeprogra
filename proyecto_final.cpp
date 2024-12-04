@@ -87,11 +87,12 @@ void GetCorrectTitleAndTag(ifstream& file, string& tempTags){
 }
 
 void InsertWordByWordToTheTrie(string& text, TrieNode& trie, const string& id) {
-    if (text.empty()) return;
+    if (text.empty()) return; // Si no hay nada en el texto, se termina la función
     string word;
     istringstream iss(text);
     while (iss >> word) {
-        trie.insert(word, id);
+        trie.insert(word, id); // Método de ese árbol (de Titles, Synopsis o Tags)
+        // Se va pasando palabra por palabra para insertar cada una en el arbol
     }
 }
 mutex trieMutex;
@@ -124,10 +125,10 @@ int main() {
     auto start = chrono::high_resolution_clock::now();
 
     string primeraLinea;
-    getline(file, primeraLinea);
-    while (getline(file, id, ',')) {
+    getline(file, primeraLinea); // Se lee la linea imdb_id,title,plot_synopsis,tags,split,synopsis_source
+    while (getline(file, id, ',')) { // Siempre que se pueda leer un id, sigue corriendo el programa
         string tempTitle;
-        GetCorrectTitleAndTag(file, tempTitle);
+        GetCorrectTitleAndTag(file, tempTitle); // Función para obtener bien el titulo de la pelicula
         title = tempTitle;
 
         string tempSynopsis;
@@ -142,9 +143,9 @@ int main() {
         GetCorrectTitleAndTag(file, tempTags);(file, tempTags); // al ser una coma enumerativa, tiene que esperar a que termine la comilla
         tags = tempTags;
 
-        mapa_ids[id] = new Movie(id,title, plot_synopsis);
-        getline(file, split, ',');
-        getline(file, synopsis_source, '\n');
+        mapa_ids[id] = new Movie(id,title, plot_synopsis); // Se crea una peli con el id leido, nombre y synopsis
+        getline(file, split, ','); // Se obtiene el "split" y no se guarda
+        getline(file, synopsis_source, '\n'); // Se obtiene el "synopsis_source" y no se guarda
 
         //thread thread1(SafeGetWordByWord, ref(title), ref(trieTitle)); // el safeword solamente sirve para que entre el thread 1
         // FUNCIONES IMPORTANTES:
