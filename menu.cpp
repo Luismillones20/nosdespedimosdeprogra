@@ -12,18 +12,18 @@
 using namespace std;
 
 template <typename... Vectors>
-void AsignedMovies(const unordered_map<string, Movie*>& mapa,
-                   TrieNode& trieTitle,
-                   TrieNode& trieSynopsis,
-                   TrieNode& trieTags,
+void AsignedMovies(const unordered_map<string, Movie*>& mapa, // Mapa <id, Movie>
+                   TrieNode& trieTitle,                       // Arbol de Titles
+                   TrieNode& trieSynopsis,                    // Arbol de Synopsis
+                   TrieNode& trieTags,                        // Arbol de Tags
                    chrono::duration<double> duration,
                    FavoritesManager& favManager,
-                   const Vectors&... vector_ids) {
-    set<string> printed_titles;       // Evitar duplicados
-    bool exit_loop = false;          // Controlar la salida del bucle principal
-    vector<Movie*> movies_5; // Almacena las películas actuales
-    Historial historial;             // Objeto para manejar los estados
-    int counter = 0;                 // Contador para gestionar estados del historial
+                   const Vectors&... vector_ids) {            // Cuantos vectores lleguen
+    set<string> printed_titles;       // Titulos mostrados. Se ussa "set" para evitar duplicados
+    bool exit_loop = false;           // Controlar la salida del bucle principal
+    vector<Movie*> movies_5;          // Almacena las películas actuales
+    Historial historial;              // Objeto para manejar los estados
+    int counter = 0;                  // Contador para gestionar estados del historial
 
     vector<string> vecLikesExistentes;
     vector<string> vecForLaterExistentes;
@@ -34,8 +34,14 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa,
     // Lambda para procesar y cargar las películas
     auto process_id = [&](const string& id) -> bool {
         auto it = mapa.find(id);
+        // Devuelve un iterator con la posicion de ese id en el mapa <id, Movie>
+
         if (it != mapa.end() && printed_titles.insert(it->second->getTitulo()).second) {
+            // Si se encontró el id, y y se pudo insertar el titulo de esa pelicula en el set "printed_titles",
+
+            // Se crea una instancia de Movie y se le asigna los valores de la pelicula encontrada en el mapa:
             Movie* movie = it->second;
+
             //Agregar valores de Likeado y Ver mas tarde:
             modifyLikesAndForLater(movie, id, vecLikesExistentes, vecForLaterExistentes);
 
@@ -48,31 +54,32 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa,
                 movie->setPeso(movie->getPeso() + 3);
             }
 
+            // Se agrega la pelicula al vector de movies_5 (para juntar las 5 peliculas de la página a mostrar)
             movies_5.push_back(movie);
         }
         return true;
     };
 
-    // Procesar todos los vectores
+    // Procesar todos los vectores. Función sin nombre que se ejecuta automáticamente
     ([&]() {
-            for (const auto& id : vector_ids) {
-                if (exit_loop) break; // Romper el bucle si se activa `exit_loop`
-                process_id(id);      // Procesar cada ID individual
-            }
+        for (const auto& id : vector_ids) {
+            if (exit_loop) break; // Romper el bucle si se activa `exit_loop`
+            process_id(id);      // Procesar cada ID individual
+        }
     }(),...); // Expansión del pack para aplicar a cada vector
 
     //Un solo algoritmo para meter peliculas y ordenarlas en tiempo real
     auto actualizarHistorial = [&]() {
         // Ordenar todas las películas globalmente por peso
-        sort(movies_5.begin(), movies_5.end(), [](Movie* a, Movie* b) {
-            return a->verifyPeso() > b->verifyPeso();
+        sort(movies_5.begin(), movies_5.end(), [](Movie* a, Movie* b) { // Se ordenan las Movies en el vector
+            return a->verifyPeso() > b->verifyPeso();                   // mediante el peso que llevan
         });
         // Limpiar el historial y regenerar mementos
         historial.clearEstados();
         vector<Movie*> group;
         for (size_t i = 0; i < movies_5.size(); ++i) {
             group.push_back(movies_5[i]);
-            if (group.size() == 5 || i == movies_5.size() - 1) {
+            if (group.size() == 5 || i == movies_5.size() - 1) {        // Cada 5 peliculas || cuando el vector se acaba
                 Memento memento(group);
                 historial.agregarEstado(memento);
                 group.clear();  // Limpiar el grupo para la próxima iteración
@@ -172,13 +179,14 @@ void AsignedMovies(const unordered_map<string, Movie*>& mapa,
 void showMenu( TrieNode& trieTitle, TrieNode& trieSynopsis, TrieNode& trieTags,
                const unordered_map<string, Movie*>& mapa_ids,
                chrono::duration<double> duration
-               ) {
+) {
     auto* favManager = new FavoritesManager(mapa_ids);
     auto* like_decorator = new LikeDecorator();
     auto* vmt_decorator = new VerMasTardeDecorator();
     int option = 0;
     vector<int> options = {1, 2, 3, 4, 5, 6};
     auto it = find(options.begin(), options.end(), option);
+    // Iterador para luego verificar si la opcion ingresada está dentro de las posibilidades
 
     while (it == options.end()) {
         cout
@@ -252,8 +260,11 @@ void showMenu( TrieNode& trieTitle, TrieNode& trieSynopsis, TrieNode& trieTags,
             string word;
             GenerateSpaces();
             while (iss >> word) {
+                //results es un vector de ids de las peliculas donde en sus titulos salen las palabras que has tipeado
                 vector<string> results = trieTitle.searchByPrefix(word);
                 vector<string> results2 = trieSynopsis.searchByPrefix(word);
+
+                //Para asignar las películas que tienen esos ids. También muestra esas películas
                 AsignedMovies(mapa_ids, trieTitle, trieSynopsis, trieTags, duration, *favManager, results);
             }
         } else if (option == 2) {
