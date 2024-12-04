@@ -28,8 +28,13 @@ public:
         order();
         string result = "Peliculas ordenadas:\n";
         for (size_t i = 0; i < current5movies.size(); ++i) {
-            result += to_string(i + 1) + ". " + current5movies[i]->getTitulo() +
-                      " (Peso: " + to_string(current5movies[i]->verifyPeso()) + ")\n";
+            result += to_string(i + 1) + ". " + current5movies[i]->getTitulo();
+            int espaciosQuitados = (current5movies[i]->getTitulo()).size();
+            string espacios;
+            for(int i=0; i<(60-espaciosQuitados); i++){
+                espacios+="-";
+            }
+            result+= " " + espacios + " (Peso: " + to_string(current5movies[i]->verifyPeso()) + ")\n";
         }
 
         return result;
