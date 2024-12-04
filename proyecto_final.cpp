@@ -14,6 +14,7 @@
 #include <Archivo.h>
 
 #include "Movie.h"
+
 //constexpr int N = 256;
 using namespace std;
 
@@ -29,23 +30,6 @@ using namespace std;
 // 10. Ahorita nomas está buscando en titulo, también debe buscar en sinopsis // FUNCION REALIZADA
 
 // Primer commit de sebastian :D
-
-
-// SOLUCIONES EN MENTE:
-
-
-// 2
-// 7. El like tendria un peso de 5, el ver mas tarde un peso de 3, se compararía cuales tienen mayor cantidad y se pondrían, basicamente un if si es que tiene un ver mas tarde o un like se pondría al inicio
-// 5. En el caso de singleton se pondría a la base de datos
-//      En el caso de memento se pondría para recordar las busquedas que ha realizado
-// 6. El más sencillo hasta ahora, poner q en lugar de un string reciba varios.
-// 10.
-// 8. En la busqueda por tag se tendria que comparar si es que está el tag se podria poner tuplas en lugar de pairs, en este caso if tupla pertenece a peliculas se pone la pelicula,
-// 9. CREO QUE EL PROBLEMA ES EL HECHO DE Q ALGUNOS CARACTERES LOS CONSIDERA COMO PALABRAS, POR EJEMPLO ARTHUR:
-
-
-// EXTRA:
-// Que se imprima en pantalla
 
 void GetCorrectGetLines(ifstream  &file, string &temp) {
     bool insideQuotes = false;
@@ -147,17 +131,10 @@ int main() {
         getline(file, split, ','); // Se obtiene el "split" y no se guarda
         getline(file, synopsis_source, '\n'); // Se obtiene el "synopsis_source" y no se guarda
 
-        //thread thread1(SafeGetWordByWord, ref(title), ref(trieTitle)); // el safeword solamente sirve para que entre el thread 1
-        // FUNCIONES IMPORTANTES:
-        //InsertWordByWordToTheTrie(title, trieTitle,id);
-        //InsertWordByWordToTheTrie(plot_synopsis, trieSynopsis,id);
-        // InsertWordByWordToTheTrie(tags,trieTags, id);
         SafeInsertWordByWordToTheTrie(title, trieTitle, id);
         SafeInsertWordByWordToTheTrie(plot_synopsis, trieSynopsis, id);
         SafeInsertWordByWordToTheTrie(tags, trieTags, id);
 
-        //GetWordByWord(plot_synopsis, trieSynopsis, 2);
-        //thread1.join();
         count++;
     }
     auto end = std::chrono::high_resolution_clock::now();
@@ -166,4 +143,3 @@ int main() {
 
     return 0;
 } // comentarioxd
-// FALTA ARREGLAR LA FUNCION DE QUE RECIBA VARIOS A LA VEZ// FALTA ARREGLAR LA FUNCION DE QUE RECIBA VARIOS A LA VEZ
